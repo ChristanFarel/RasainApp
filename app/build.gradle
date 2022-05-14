@@ -65,4 +65,16 @@ dependencies {
 //    Datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
+//    Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
+//    RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+//    Courutine
+    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2" //main coroutine rule
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
 }

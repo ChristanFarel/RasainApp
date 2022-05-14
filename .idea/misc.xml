@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.13119143239625167" />
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/item_recipe_home.xml" value="0.25" />
       </map>
     </option>
   </component>

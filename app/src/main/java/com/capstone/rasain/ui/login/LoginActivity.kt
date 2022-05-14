@@ -1,4 +1,4 @@
-package com.capstone.rasain.ui
+package com.capstone.rasain.ui.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,22 +1,22 @@
 package com.capstone.rasain
 
-import android.content.ContentValues
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.capstone.rasain.response.NewRecipeResponse
-import com.capstone.rasain.response.ResultsItem
-import com.capstone.rasain.retrofit.ApiConfig
-import com.capstone.rasain.retrofit.ApiServiceMasakApa
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.capstone.rasain.databinding.ActivityMainBinding
+import com.capstone.rasain.ui.home.HomeActivity
+
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnToHome.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java))
+        }
     }
 }
