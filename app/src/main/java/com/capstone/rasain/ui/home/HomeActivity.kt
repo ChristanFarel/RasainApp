@@ -2,9 +2,12 @@ package com.capstone.rasain.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.HorizontalScrollView
+import android.widget.LinearLayout.HORIZONTAL
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
@@ -44,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setRecycler(recipe: ArrayList<ResultsItem>){
-        binding.rcyRecipe.layoutManager = LinearLayoutManager(this)
+        binding.rcyRecipe.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         val listUserAdapter = ListRecipeAdapter(recipe)
         binding.rcyRecipe.adapter = listUserAdapter
     }

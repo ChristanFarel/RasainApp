@@ -7,8 +7,7 @@ import retrofit2.http.GET
 interface ApiServiceMasakApa {
 
     @GET("/api/recipes")
-    fun getNewRecipe(
+    fun getNewRecipe(): Call<NewRecipeResponse>
 
-    ): Call<NewRecipeResponse>
 
 }
