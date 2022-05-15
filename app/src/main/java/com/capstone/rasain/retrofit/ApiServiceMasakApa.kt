@@ -8,6 +8,4 @@ interface ApiServiceMasakApa {
 
     @GET("/api/recipes")
     fun getNewRecipe(): Call<NewRecipeResponse>
-
-
 }

@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.3.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -77,4 +78,13 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2" //main coroutine rule
     testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+//    ViewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.google.android.material:material:1.7.0-alpha01'
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+//noinspection GradleDependency
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+
 }
