@@ -33,7 +33,6 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(it.thumb)
                 .into(binding.imgRecipeDetail)
-
             binding.txtNameRecipeDetail.text = it.title
             binding.txtDiffRecipeDetail.text = it.dificulty
             binding.txtPortionRecipeDetail.text = it.servings
