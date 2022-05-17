@@ -1,14 +1,11 @@
-package com.capstone.rasain.ui.home
+package com.capstone.rasain.ui.activity.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.HorizontalScrollView
-import android.widget.LinearLayout.HORIZONTAL
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.ActivityHomeBinding

@@ -1,4 +1,4 @@
-package com.capstone.rasain.fragment.favorite
+package com.capstone.rasain.ui.fragment.favorite
 
 import androidx.lifecycle.ViewModel
 

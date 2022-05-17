@@ -1,17 +1,14 @@
 package com.capstone.rasain
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.capstone.rasain.databinding.ActivityMainBinding
-import com.capstone.rasain.fragment.favorite.FavoriteFragment
-import com.capstone.rasain.fragment.home.HomeFragment
-import com.capstone.rasain.ui.home.HomeActivity
+import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
+import com.capstone.rasain.ui.fragment.home.HomeFragment
 
 
 class MainActivity : AppCompatActivity() {

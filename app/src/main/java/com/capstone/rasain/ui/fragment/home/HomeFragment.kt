@@ -1,4 +1,4 @@
-package com.capstone.rasain.fragment.home
+package com.capstone.rasain.ui.fragment.home
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,15 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.capstone.rasain.Repository
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.HomeFragmentBinding
 import com.capstone.rasain.di.Injection
 import com.capstone.rasain.response.ResultsItem
-import com.capstone.rasain.retrofit.ApiServiceMasakApa
-import com.capstone.rasain.ui.home.HomeViewModel
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {

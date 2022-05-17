@@ -2,8 +2,9 @@ package com.capstone.rasain
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.rasain.fragment.home.HomeViewModelFragment
-import com.capstone.rasain.ui.home.HomeViewModel
+import com.capstone.rasain.ui.activity.detail.DetailViewModel
+import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
+import com.capstone.rasain.ui.activity.home.HomeViewModel
 
 class ViewModelFactory(private val repo: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -17,6 +18,10 @@ class ViewModelFactory(private val repo: Repository) : ViewModelProvider.NewInst
 
             modelClass.isAssignableFrom(HomeViewModelFragment::class.java) -> {
                 HomeViewModelFragment(repo) as T
+            }
+
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(repo) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

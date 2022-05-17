@@ -4,7 +4,9 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.capstone.rasain.response.DetailRecipeResponse
 import com.capstone.rasain.response.NewRecipeResponse
+import com.capstone.rasain.response.Results
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.retrofit.ApiServiceMasakApa
 import retrofit2.Call
@@ -33,6 +35,33 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa) {
             }
 
             override fun onFailure(call: Call<NewRecipeResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
+        return allRecipe
+    }
+
+    fun getDetailRecipe(key: String): LiveData<Results>{
+        val allRecipe = MutableLiveData<Results>()
+
+        val client = apiServiceMasakApa.getDetailRecipe(key)
+        client.enqueue(object: Callback<DetailRecipeResponse> {
+            override fun onResponse(
+                call: Call<DetailRecipeResponse>,
+                response: Response<DetailRecipeResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        allRecipe.value = responseBody.results!!
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<DetailRecipeResponse>, t: Throwable) {
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
 

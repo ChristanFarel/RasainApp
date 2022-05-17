@@ -1,12 +1,12 @@
-package com.capstone.rasain.ui.login
+package com.capstone.rasain.ui.activity.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.capstone.rasain.R
 
-class LoginActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
     }
 }

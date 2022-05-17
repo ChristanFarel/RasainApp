@@ -1,6 +1,7 @@
 package com.capstone.rasain.adapter
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.capstone.rasain.databinding.ItemRecipeHomeBinding
 import com.capstone.rasain.response.NewRecipeResponse
 import com.capstone.rasain.response.ResultsItem
+import com.capstone.rasain.ui.activity.detail.DetailActivity
 
 class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
     RecyclerView.Adapter<ListRecipeAdapter.ListViewHolder>() {
@@ -25,7 +27,7 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
         val allRecipe = listRecipe[position]
 
         val imgRecipe = allRecipe.thumb
-        val nameRecipe = allRecipe.key
+        val nameRecipe = allRecipe.title
         val timeRecipe = allRecipe.times
 
         Glide.with(holder.itemView.context)
@@ -36,28 +38,16 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
         holder.binding.txtTimeRecipe.text = timeRecipe
 
         holder.itemView.setOnClickListener{
-            Toast.makeText(holder.itemView.context, "Terpencet", Toast.LENGTH_SHORT)
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra(key, allRecipe.key)
+            holder.itemView.context.startActivity(intent)
         }
 
-//        val foto = semua.avatarUrl
-//        val username = semua.login
-//
-//        Glide.with(holder.itemView.context)
-//            .load(foto)
-//            .into(holder.binding.itemGambar)
-//
-//        holder.binding.itemUsername.text = username
-//
-//
-//        holder.itemView.setOnClickListener {
-//
-//            val intent = Intent(holder.itemView.context, DetailUserActivity::class.java)
-//            intent.putExtra(ListGHuserAdapter.USERNAME, username)
-//            SectionsPagerAdapter.username = username
-//            holder.itemView.context.startActivity(intent)
-//
-//        }
     }
 
     override fun getItemCount(): Int = listRecipe.size
+
+    companion object{
+        var key = "KEY"
+    }
 }
