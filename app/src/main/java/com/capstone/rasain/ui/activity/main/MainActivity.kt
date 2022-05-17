@@ -1,4 +1,4 @@
-package com.capstone.rasain
+package com.capstone.rasain.ui.activity.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.capstone.rasain.R
 import com.capstone.rasain.databinding.ActivityMainBinding
 import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
 import com.capstone.rasain.ui.fragment.home.HomeFragment
@@ -35,12 +36,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.btmNav.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.home ->{
+                R.id.homeMenu ->{
                     val viewPager = binding.viewPager
                     viewPager.setCurrentItem(0)
                     true
                 }
-                R.id.favotite ->{
+                R.id.favoriteMenu ->{
                     val viewPager = binding.viewPager
                     viewPager.setCurrentItem(1)
                     true
@@ -65,12 +66,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.home -> {
+            R.id.homeMenu -> {
                 val viewPager = binding.viewPager
                 viewPager.setCurrentItem(0)
                 true
             }
-            R.id.favotite -> {
+            R.id.favoriteMenu -> {
                 val viewPager = binding.viewPager
                 viewPager.setCurrentItem(1)
                 true

@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeMenu"
         android:enabled="true"
-        android:icon="@drawable/ic_sms"
+        android:icon="@drawable/ic_home_2"
         android:title="Home"/>
     <item
-        android:id="@+id/favotite"
+        android:id="@+id/favoriteMenu"
         android:enabled="true"
-        android:icon="@drawable/ic_key"
+        android:icon="@drawable/ic_heart"
+        android:title="Favorite"/>
+    <item
+        android:id="@+id/scanMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_scan"
+        android:title="Favorite"/>
+    <item
+        android:id="@+id/articleMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_book_square"
+        android:title="Favorite"/>
+    <item
+        android:id="@+id/aboutUsMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_people"
         android:title="Favorite"/>
 </menu>
