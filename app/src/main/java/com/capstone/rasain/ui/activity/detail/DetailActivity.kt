@@ -35,6 +35,11 @@ class DetailActivity : AppCompatActivity() {
                 .into(binding.imgRecipeDetail)
 
             binding.txtNameRecipeDetail.text = it.title
+            binding.txtDiffRecipeDetail.text = it.dificulty
+            binding.txtPortionRecipeDetail.text = it.servings
+            binding.txtTimeRecipeDetail.text = it.times
+            binding.txtIngRecipeDetail.text = it.ingredient.toString()
+            binding.txtHowToCookRecipeDetail.text = it.step.toString()
         })
 
 
