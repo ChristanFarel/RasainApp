@@ -22,9 +22,10 @@
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_home_2.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_key.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_scan.xml" value="0.1785" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/rounded_search_bar.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_home.xml" value="0.14130434782608695" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_main.xml" value="0.4928909952606635" />
-        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment.xml" value="0.22" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment.xml" value="0.5" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment2.xml" value="0.22" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/item_recipe_home.xml" value="0.3333333333333333" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/menu/bottom_nav.xml" value="0.17552083333333332" />
