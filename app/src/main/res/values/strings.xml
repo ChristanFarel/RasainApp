@@ -8,4 +8,9 @@
     <string name="txtPass">Password</string>
     <string name="txtSignUp">Sign Up</string>
     <string name="txtEmail">Email</string>
+    <string name="welcome_user">Welcome, %s</string>
+    <string name="desc_app">Let’s cook healthier \nand cleaner food together</string>
+    <string name="search_food">Search food...</string>
+    <string name="category">Category</string>
+    <string name="food">Food</string>
 </resources>

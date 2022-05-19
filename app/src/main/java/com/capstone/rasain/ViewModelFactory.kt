@@ -1,27 +1,29 @@
 package com.capstone.rasain
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.detail.DetailViewModel
 import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
 import com.capstone.rasain.ui.activity.home.HomeViewModel
 
-class ViewModelFactory(private val repo: Repository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
 
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(repo) as T
+                HomeViewModel(Injection.provideRepository(context)) as T
             }
 
             modelClass.isAssignableFrom(HomeViewModelFragment::class.java) -> {
-                HomeViewModelFragment(repo) as T
+                HomeViewModelFragment(Injection.provideRepository(context)) as T
             }
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
-                DetailViewModel(repo) as T
+                DetailViewModel(Injection.provideRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

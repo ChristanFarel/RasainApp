@@ -1,11 +1,14 @@
 package com.capstone.rasain.ui.activity.main
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.capstone.rasain.R
 import com.capstone.rasain.databinding.ActivityMainBinding
 import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
@@ -20,42 +23,59 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var viewPager = binding.viewPager
+        val viewPager = binding.viewPager
 
         val listFragment: ArrayList<Fragment> = arrayListOf(HomeFragment(), FavoriteFragment())
 
-        var pagerAdapter =  PagerAdapter(this, listFragment)
+        val pagerAdapter =  PagerAdapter(this, listFragment)
 
         viewPager.adapter = pagerAdapter
-        viewPager.setCurrentItem(0)
+        viewPager.isUserInputEnabled = false
+//        viewPager.currentItem = 0
 
 
 //        binding.btnToHome.setOnClickListener {
 //            startActivity(Intent(this, HomeActivity::class.java))
 //        }
 
-        binding.btmNav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.homeMenu ->{
-                    val viewPager = binding.viewPager
-                    viewPager.setCurrentItem(0)
-                    true
-                }
-                R.id.favoriteMenu ->{
-                    val viewPager = binding.viewPager
-                    viewPager.setCurrentItem(1)
-                    true
-                }
-                else -> false
+        //SWIPE VIEW PAGER
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.bottomNav.menu.getItem(position).isChecked = true
             }
+        })
+
+        binding.bottomNav.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.homeMenu -> viewPager.setCurrentItem(0, false)
+                R.id.favoriteMenu -> viewPager.setCurrentItem(1, false)
+            }
+            true
         }
+
+        setupView()
+//        binding.btmNav.setOnNavigationItemSelectedListener {
+//            when(it.itemId){
+//                R.id.homeMenu ->{
+//                    val viewPager = binding.viewPager
+//                    viewPager.setCurrentItem(0)
+//                    true
+//                }
+//                R.id.favoriteMenu ->{
+//                    val viewPager = binding.viewPager
+//                    viewPager.setCurrentItem(1)
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
 
     }
 
-    class PagerAdapter(val activity: AppCompatActivity, val listFragment: ArrayList<Fragment>) : FragmentStateAdapter(activity) {
+    class PagerAdapter(val activity: AppCompatActivity, private val listFragment: ArrayList<Fragment>) : FragmentStateAdapter(activity) {
         override fun getItemCount(): Int = listFragment.size
 
-         override fun createFragment(position: Int): Fragment = listFragment.get(position)
+         override fun createFragment(position: Int): Fragment = listFragment[position]
         }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,19 +84,37 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.homeMenu -> {
-                val viewPager = binding.viewPager
-                viewPager.setCurrentItem(0)
-                true
-            }
-            R.id.favoriteMenu -> {
-                val viewPager = binding.viewPager
-                viewPager.setCurrentItem(1)
-                true
-            }
-        }
-        return super.onOptionsItemSelected(item)
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        binding.bottomNav.menu.getItem(2).isEnabled = false
+        return true
     }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
+    }
+
+    //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.homeMenu -> {
+//                val viewPager = binding.viewPager
+//                viewPager.setCurrentItem(0)
+//                true
+//            }
+//            R.id.favoriteMenu -> {
+//                val viewPager = binding.viewPager
+//                viewPager.setCurrentItem(1)
+//                true
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 }

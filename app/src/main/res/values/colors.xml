@@ -10,6 +10,7 @@
     <color name="primaryColor">#57b757</color>
     <color name="primaryLightColor">#8aea86</color>
     <color name="primaryDarkColor">#1e862a</color>
+    <color name="iconColor">#92BCA8</color>
     <color name="secondaryColor">#ffebe0</color>
     <color name="secondaryLightColor">#ffffff</color>
     <color name="secondaryDarkColor">#ccb9ae</color>

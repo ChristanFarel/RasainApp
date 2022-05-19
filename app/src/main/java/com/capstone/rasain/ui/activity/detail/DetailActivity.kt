@@ -24,7 +24,7 @@ class DetailActivity : AppCompatActivity() {
 
         detailViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(Injection.provideRepository(this))
+            ViewModelFactory(this)
         )[DetailViewModel::class.java]
 
         key = intent.getStringExtra(ListRecipeAdapter.key).toString()

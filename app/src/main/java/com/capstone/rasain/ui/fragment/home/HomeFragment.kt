@@ -1,11 +1,10 @@
 package com.capstone.rasain.ui.fragment.home
 
+import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
@@ -38,17 +37,17 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         homeViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(Injection.provideRepository(requireContext()))
+            ViewModelFactory(requireContext())
         )[HomeViewModelFragment::class.java]
 
-        homeViewModel.getNewRecipe().observe(viewLifecycleOwner,{
+        homeViewModel.getNewRecipe().observe(viewLifecycleOwner) {
             setRecycler(it)
-        })
+        }
     }
 
     private fun setRecycler(recipe: ArrayList<ResultsItem>){
-        binding.rcyRecipeFragment.apply {
-            layoutManager = LinearLayoutManager(activity)
+        binding.rcyFood.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 //            val listUserAdapter = ListRecipeAdapter(recipe)
 //            binding.rcyRecipeFragment.adapter = listUserAdapter
             adapter = ListRecipeAdapter(recipe)

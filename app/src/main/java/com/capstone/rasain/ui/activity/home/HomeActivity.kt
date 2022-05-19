@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
 
         homeViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(Injection.provideRepository(this))
+            ViewModelFactory(this)
         )[HomeViewModel::class.java]
 
 
@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setViewModel(): ViewModel{
         homeViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(Injection.provideRepository(this))
+            ViewModelFactory(this)
         )[HomeViewModel::class.java]
 
         return homeViewModel
