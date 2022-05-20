@@ -4,10 +4,7 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.capstone.rasain.response.DetailRecipeResponse
-import com.capstone.rasain.response.NewRecipeResponse
-import com.capstone.rasain.response.Results
-import com.capstone.rasain.response.ResultsItem
+import com.capstone.rasain.response.*
 import com.capstone.rasain.retrofit.ApiServiceMasakApa
 import retrofit2.Call
 import retrofit2.Callback
@@ -67,5 +64,32 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa) {
 
         })
         return allRecipe
+    }
+
+    fun getCategory(): LiveData<ArrayList<ResultsCategory>>{
+        val allCategory = MutableLiveData<ArrayList<ResultsCategory>>()
+
+        val client = apiServiceMasakApa.getCategory()
+        client.enqueue(object: Callback<CategoryResponse> {
+            override fun onResponse(
+                call: Call<CategoryResponse>,
+                response: Response<CategoryResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        allCategory.value = responseBody.results!!
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
+        return allCategory
     }
 }

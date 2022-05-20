@@ -7,9 +7,11 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.ViewModelFactory
+import com.capstone.rasain.adapter.ListCategoryAdapter
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.HomeFragmentBinding
 import com.capstone.rasain.di.Injection
+import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
 
 @Suppress("DEPRECATION")
@@ -41,16 +43,29 @@ class HomeFragment : Fragment() {
         )[HomeViewModelFragment::class.java]
 
         homeViewModel.getNewRecipe().observe(viewLifecycleOwner) {
-            setRecycler(it)
+            setFoodRecycler(it)
+        }
+
+        homeViewModel.getCategory().observe(viewLifecycleOwner){
+            setCateRecycler(it)
         }
     }
 
-    private fun setRecycler(recipe: ArrayList<ResultsItem>){
+    private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
         binding.rcyFood.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 //            val listUserAdapter = ListRecipeAdapter(recipe)
 //            binding.rcyRecipeFragment.adapter = listUserAdapter
             adapter = ListRecipeAdapter(recipe)
+        }
+
+
+    }
+
+    private fun setCateRecycler(category: ArrayList<ResultsCategory>){
+        binding.rcyCategory.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            adapter = ListCategoryAdapter(category)
         }
     }
 

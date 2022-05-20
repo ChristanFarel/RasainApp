@@ -5,4 +5,6 @@ import com.capstone.rasain.Repository
 
 class HomeViewModelFragment(private val repository: Repository) : ViewModel() {
     fun getNewRecipe() = repository.getNewRecipe()
+
+    fun getCategory() = repository.getCategory()
 }
