@@ -87,4 +87,6 @@ dependencies {
 //noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
+// gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 }
