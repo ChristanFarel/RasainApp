@@ -12,8 +12,9 @@ object Injection {
         val database = FavoriteDatabase.getDatabase(context)
         val favDao = database.favDao()
         val apiService = ApiConfig.getApiService()
+        val apiServiceRasainApp = ApiConfig.getApiServiceRasainApp()
         val appExecutors = AppExecutors()
 //        val loginPreference = LoginPreference.getInstance(context.dataStore)
-        return Repository(apiService, favDao, appExecutors)
+        return Repository(apiService, favDao, appExecutors, apiServiceRasainApp)
     }
 }

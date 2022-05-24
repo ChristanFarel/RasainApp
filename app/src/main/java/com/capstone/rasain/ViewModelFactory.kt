@@ -7,6 +7,7 @@ import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.detail.DetailViewModel
 import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
 import com.capstone.rasain.ui.activity.home.HomeViewModel
+import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
@@ -29,6 +30,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
 
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 FavoriteViewModel(Injection.provideRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                RegisterViewModel(Injection.provideRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

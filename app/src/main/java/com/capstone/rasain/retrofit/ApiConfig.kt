@@ -24,5 +24,22 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiServiceMasakApa::class.java)
         }
+
+        fun getApiServiceRasainApp(): ApiServiceRasainApp {
+            val loggingInterceptor = if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            } else {
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+            }
+            val client = OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://192.168.0.109:8080/v1/auth/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build()
+            return retrofit.create(ApiServiceRasainApp::class.java)
+        }
     }
 }

@@ -22,7 +22,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="331dp"
+            android:layout_height="100dp"
             app:srcCompat="@drawable/register" />
 
         <TextView
@@ -93,6 +93,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/btnRegister"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
