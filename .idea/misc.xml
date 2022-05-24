@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_favorite.xml" value="0.1955" />
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_favorite_selected.xml" value="0.1955" />
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_home_selected.xml" value="0.1955" />
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_logout.xml" value="0.1955" />
+        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_lovedetail.xml" value="0.1955" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/round_category.xml" value="0.1955" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/rounded_search_bar.xml" value="0.1955" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.13119143239625167" />

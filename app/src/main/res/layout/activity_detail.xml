@@ -35,7 +35,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/imgBackDetail"
+                android:id="@+id/imgBtnBackDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_arrow_square_left"
@@ -44,7 +44,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/imgFavDetail"
+                android:id="@+id/imgBtnFavDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_lovedetail"
