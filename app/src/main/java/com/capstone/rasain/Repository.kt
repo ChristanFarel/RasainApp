@@ -112,4 +112,6 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
             favFood.deleteFav(key)
         }
     }
+
+    fun getAllFav(): LiveData<List<FavoriteFoodEntity>> = favFood.getFav()
 }
