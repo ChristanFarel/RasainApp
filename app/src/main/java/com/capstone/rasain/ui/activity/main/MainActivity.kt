@@ -12,6 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.rasain.R
 import com.capstone.rasain.databinding.ActivityMainBinding
+import com.capstone.rasain.ui.activity.login.LoginActivity
 import com.capstone.rasain.ui.activity.register.RegisterActivity
 import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
 import com.capstone.rasain.ui.fragment.home.HomeFragment
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.btnRegisterCoba.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         val viewPager = binding.viewPager

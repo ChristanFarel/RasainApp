@@ -145,4 +145,34 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
         })
         return register
     }
+
+    fun login(email: String, pass: String): LiveData<Result<Boolean>>{
+        val login = MutableLiveData<Result<Boolean>>()
+        login.value = Result.Loading
+        val client = apiServiceRasainApp.login(email, pass)
+        client.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(
+                call: Call<LoginResponse>,
+                response: Response<LoginResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        Log.d("rb",responseBody.toString())
+                        login.value = Result.Success(true)
+                    } else {
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }else{
+                    login.value = Result.Error("Error")
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                login.value = Result.Error("Error")
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+        })
+        return login
+    }
 }

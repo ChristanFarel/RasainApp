@@ -37,7 +37,7 @@
             android:layout_gravity="center">
 
             <EditText
-                android:id="@+id/edtTxtEmail"
+                android:id="@+id/edtTxtEmailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -57,7 +57,7 @@
             android:layout_gravity="center">
 
             <EditText
-                android:id="@+id/edtTxtPass"
+                android:id="@+id/edtTxtPassLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -70,6 +70,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/btnLogin"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

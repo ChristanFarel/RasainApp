@@ -9,14 +9,14 @@ import retrofit2.http.POST
 
 interface ApiServiceRasainApp {
     @FormUrlEncoded
-    @POST("login")
+    @POST("auth/login")
     fun login(
         @Field("email") email: String,
         @Field("password") pass: String
     ): Call<LoginResponse>
 
     @FormUrlEncoded
-    @POST("register")
+    @POST("auth/register")
     fun register(
         @Field("fullName") fullName: String,
         @Field("email") email: String,
