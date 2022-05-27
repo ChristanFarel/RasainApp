@@ -1,9 +1,13 @@
 package com.capstone.rasain.ui.activity.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.rasain.R
 import com.capstone.rasain.Result
@@ -16,6 +20,8 @@ import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.main.MainActivity
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "pref")
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel

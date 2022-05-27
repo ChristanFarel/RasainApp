@@ -1,10 +1,11 @@
 package com.capstone.rasain.di
 
 import android.content.Context
+import com.capstone.rasain.Preference
 import com.capstone.rasain.Repository
-import com.capstone.rasain.database.local.room.FavoriteDao
 import com.capstone.rasain.database.local.room.FavoriteDatabase
 import com.capstone.rasain.retrofit.ApiConfig
+import com.capstone.rasain.ui.activity.login.dataStore
 import com.capstone.rasain.util.AppExecutors
 
 object Injection {
@@ -14,7 +15,7 @@ object Injection {
         val apiService = ApiConfig.getApiService()
         val apiServiceRasainApp = ApiConfig.getApiServiceRasainApp()
         val appExecutors = AppExecutors()
-//        val loginPreference = LoginPreference.getInstance(context.dataStore)
-        return Repository(apiService, favDao, appExecutors, apiServiceRasainApp)
+        val preference = Preference.getInstance(context.dataStore)
+        return Repository(apiService, favDao, appExecutors, apiServiceRasainApp, preference)
     }
 }

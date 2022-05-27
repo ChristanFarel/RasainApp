@@ -9,6 +9,8 @@ import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
 import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.login.LoginViewModel
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
+import com.capstone.rasain.ui.activity.splashscreen.SplashScreenActivity
+import com.capstone.rasain.ui.activity.splashscreen.SplashScreenViewModel
 import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
@@ -39,6 +41,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
 
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(Injection.provideRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(SplashScreenViewModel::class.java) -> {
+                SplashScreenViewModel(Injection.provideRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

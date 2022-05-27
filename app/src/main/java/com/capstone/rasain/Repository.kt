@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.database.local.room.FavoriteDao
 import com.capstone.rasain.response.*
@@ -14,8 +15,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.capstone.rasain.Result
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
-class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  val favFood: FavoriteDao, private val appExecutors: AppExecutors, private val apiServiceRasainApp: ApiServiceRasainApp) {
+class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  val favFood: FavoriteDao, private val appExecutors: AppExecutors, private val apiServiceRasainApp: ApiServiceRasainApp, private val preference: Preference ) {
 
     fun getNewRecipe(): LiveData<ArrayList<ResultsItem>>{
         val allRecipe = MutableLiveData<ArrayList<ResultsItem>>()
@@ -158,10 +161,12 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        Log.d("rb",responseBody.toString())
                         login.value = Result.Success(true)
+                        MainScope().launch {
+                            preference.saveTokenUser(responseBody.data, responseBody.user)
+                        }
                     } else {
-                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                        Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
                     }
                 }else{
                     login.value = Result.Error("Error")
@@ -170,9 +175,17 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 login.value = Result.Error("Error")
-                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+                Log.e(ContentValues.TAG, "onFailure2: ${t.message}")
             }
         })
         return login
+    }
+
+    fun getToken(): LiveData<Data>{
+        return preference.getToken().asLiveData()
+    }
+
+    fun getUser(): LiveData<User>{
+        return preference.getUser().asLiveData()
     }
 }
