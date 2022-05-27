@@ -1,5 +1,6 @@
 package com.capstone.rasain.ui.fragment.home
 
+import android.content.Intent
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.capstone.rasain.databinding.HomeFragmentBinding
 import com.capstone.rasain.di.Injection
 import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
+import com.capstone.rasain.ui.activity.login.LoginActivity
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -48,6 +50,12 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getCategory().observe(viewLifecycleOwner){
             setCateRecycler(it)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            homeViewModel.logut()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            activity?.finish()
         }
     }
 

@@ -18,6 +18,7 @@ import com.capstone.rasain.databinding.ActivityRegisterBinding
 import com.capstone.rasain.ui.activity.home.HomeActivity
 import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.main.MainActivity
+import com.capstone.rasain.ui.activity.register.RegisterActivity
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 
 
@@ -54,6 +55,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             })
+        }
+
+        binding.btnToRegister.setOnClickListener {
+            startActivity(Intent(this,RegisterActivity::class.java))
         }
     }
 }

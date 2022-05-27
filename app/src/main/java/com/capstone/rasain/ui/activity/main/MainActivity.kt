@@ -27,11 +27,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-        binding.btnRegisterCoba.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-
         val viewPager = binding.viewPager
 
         val listFragment: ArrayList<Fragment> = arrayListOf(HomeFragment(), FavoriteFragment())

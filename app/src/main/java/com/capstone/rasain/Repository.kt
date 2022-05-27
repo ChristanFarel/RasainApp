@@ -163,7 +163,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
                     if (responseBody != null) {
                         login.value = Result.Success(true)
                         MainScope().launch {
-                            preference.saveTokenUser(responseBody.data, responseBody.user)
+                            preference.saveTokenUser(responseBody.data.user)
                         }
                     } else {
                         Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
@@ -181,11 +181,13 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
         return login
     }
 
-    fun getToken(): LiveData<Data>{
-        return preference.getToken().asLiveData()
+    fun logout(){
+        MainScope().launch {
+            preference.logout()
+        }
     }
 
-    fun getUser(): LiveData<User>{
-        return preference.getUser().asLiveData()
+    fun getToken(): LiveData<User>{
+        return preference.getTokenUser().asLiveData()
     }
 }
