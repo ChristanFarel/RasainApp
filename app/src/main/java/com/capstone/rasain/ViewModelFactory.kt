@@ -9,6 +9,7 @@ import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
 import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.login.LoginViewModel
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
+import com.capstone.rasain.ui.activity.search.SearchResultViewModel
 import com.capstone.rasain.ui.activity.splashscreen.SplashScreenActivity
 import com.capstone.rasain.ui.activity.splashscreen.SplashScreenViewModel
 import com.capstone.rasain.ui.activity.upload.UploadViewModel
@@ -50,6 +51,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
 
             modelClass.isAssignableFrom(UploadViewModel::class.java) -> {
                 UploadViewModel(Injection.provideRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(SearchResultViewModel::class.java) -> {
+                SearchResultViewModel(Injection.provideRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

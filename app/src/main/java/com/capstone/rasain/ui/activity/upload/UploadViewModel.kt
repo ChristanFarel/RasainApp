@@ -9,4 +9,6 @@ class UploadViewModel(private val repo: Repository): ViewModel() {
     fun getToken() = repo.getToken()
 
     fun upload(imageMultipart: MultipartBody.Part, token: String) = repo.upload(imageMultipart, token)
+
+
 }

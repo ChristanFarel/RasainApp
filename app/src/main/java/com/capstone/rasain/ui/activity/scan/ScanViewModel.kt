@@ -4,5 +4,4 @@ import androidx.lifecycle.ViewModel
 import com.capstone.rasain.Repository
 
 class ScanViewModel(private val repo: Repository): ViewModel() {
-
 }

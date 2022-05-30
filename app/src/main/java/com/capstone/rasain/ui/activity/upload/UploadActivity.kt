@@ -1,6 +1,7 @@
 package com.capstone.rasain.ui.activity.upload
 
 import android.Manifest
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.capstone.rasain.databinding.ActivityUploadBinding
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.scan.reduceFileImage
 import com.capstone.rasain.ui.activity.scan.rotateBitmap
+import com.capstone.rasain.ui.activity.search.SearchResultActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -26,6 +28,7 @@ class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
     private lateinit var uploadViewModel: UploadViewModel
     private var getFile: File? = null
+    private var getFood: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,14 +70,20 @@ class UploadActivity : AppCompatActivity() {
 
             uploadViewModel.getToken().observe(this,{
                 uploadViewModel.upload(imageMultipart, it.token).observe(this,{
-                    Log.d("Coba", it.toString())
+                    getFood = it[0].label
+                    val intent = Intent(this, SearchResultActivity::class.java)
+                    intent.putExtra(FOOD, getFood)
+                    startActivity(intent)
                 })
             })
+
+
         }
     }
 
     companion object {
         const val CAMERA_X_RESULT = 200
+        const val FOOD = "FOOD"
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
