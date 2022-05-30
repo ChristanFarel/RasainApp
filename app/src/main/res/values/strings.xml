@@ -7,6 +7,7 @@
     <string name="loginText">Login</string>
     <string name="txtPass">Password</string>
     <string name="txtSignUp">Sign Up</string>
+    <string name="txtSignIn">Sign In</string>
     <string name="txtEmail">Email</string>
     <string name="welcome_user">Welcome, %s</string>
     <string name="desc_app">Let’s cook healthier \nand cleaner food together</string>

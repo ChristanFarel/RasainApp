@@ -11,9 +11,7 @@
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_scan.xml" value="0.1721014492753623" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/activity_upload.xml" value="0.25" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/favorite_fragment.xml" value="0.19010416666666666" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/home_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/home_fragment_old.xml" value="0.20416666666666666" />
@@ -23,15 +21,21 @@
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/about_us_selector.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/article_selector.xml" value="0.1" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/bg_button.xml" value="0.1" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/bg_button_disable.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/bottom_nav_color.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/favorite_selector.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_arrow_square_left.xml" value="0.1785" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_close_circle.xml" value="0.1" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_email.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_home_2.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_key.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_scan.xml" value="0.1785" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_sms.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/rounded_search_bar.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_home.xml" value="0.14130434782608695" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_login_old.xml" value="0.1796875" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_main.xml" value="0.4928909952606635" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment.xml" value="0.5" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment2.xml" value="0.22" />
