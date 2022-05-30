@@ -15,8 +15,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.capstone.rasain.Result
+import com.capstone.rasain.retrofit.ApiConfig
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 
 class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  val favFood: FavoriteDao, private val appExecutors: AppExecutors, private val apiServiceRasainApp: ApiServiceRasainApp, private val preference: Preference ) {
 
@@ -189,5 +191,31 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
 
     fun getToken(): LiveData<User>{
         return preference.getTokenUser().asLiveData()
+    }
+
+    fun upload(imageMultipart: MultipartBody.Part, token: String): LiveData<ArrayList<PredictionsItem>>{
+        val up = MutableLiveData<ArrayList<PredictionsItem>>()
+        val service = ApiConfig.getApiServiceRasainApp().upload("Bearer $token",imageMultipart)
+        service.enqueue(object : Callback<FoodPredictionResponse> {
+            override fun onResponse(
+                call: Call<FoodPredictionResponse>,
+                response: Response<FoodPredictionResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null && !responseBody.error) {
+                        up.value = responseBody.data.predictions
+                        Log.d("hahah",up.value.toString())
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailureNya1: ${response.message()}")
+                    }
+                }
+            }
+            override fun onFailure(call: Call<FoodPredictionResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailureNya2: ${t.message}")
+            }
+        })
+        return up
+
     }
 }
