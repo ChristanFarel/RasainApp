@@ -3,11 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_favorite.xml" value="0.1955" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_favorite_selected.xml" value="0.1955" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_home_selected.xml" value="0.1955" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_logout.xml" value="0.1955" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/ic_lovedetail.xml" value="0.1955" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/round_category.xml" value="0.1955" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/drawable/rounded_search_bar.xml" value="0.1955" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.13119143239625167" />
@@ -21,10 +16,8 @@
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/home_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/home_fragment_old.xml" value="0.20416666666666666" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/item_category_home.xml" value="0.20416666666666666" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/item_favorite.xml" value="0.33" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/layout/item_recipe_home.xml" value="0.25" />
         <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/menu/bottom_nav.xml" value="0.20416666666666666" />
-        <entry key="..\:/Kuliah/Bangkit/Capstone/RasainApp/app/src/main/res/xml/network_security_config.xml" value="0.1721014492753623" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/about_us_selector.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/article_selector.xml" value="0.1" />
@@ -36,6 +29,7 @@
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/ic_scan.xml" value="0.1785" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/drawable/rounded_search_bar.xml" value="0.1" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_home.xml" value="0.14130434782608695" />
+        <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/activity_main.xml" value="0.4928909952606635" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment.xml" value="0.5" />
         <entry key="..\:/android-workspace/RasainApp/app/src/main/res/layout/home_fragment2.xml" value="0.22" />
