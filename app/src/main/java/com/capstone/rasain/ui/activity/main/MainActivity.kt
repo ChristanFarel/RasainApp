@@ -1,12 +1,20 @@
 package com.capstone.rasain.ui.activity.main
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -14,13 +22,40 @@ import com.capstone.rasain.R
 import com.capstone.rasain.databinding.ActivityMainBinding
 import com.capstone.rasain.ui.activity.login.LoginActivity
 import com.capstone.rasain.ui.activity.register.RegisterActivity
+import com.capstone.rasain.ui.activity.scan.ScanActivity
+import com.capstone.rasain.ui.activity.scan.rotateBitmap
+import com.capstone.rasain.ui.activity.scan.uriToFile
 import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
 import com.capstone.rasain.ui.fragment.home.HomeFragment
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (!allPermissionsGranted()) {
+                Toast.makeText(
+                    this,
+                    "Tidak mendapatkan permission.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,10 +73,6 @@ class MainActivity : AppCompatActivity() {
 //        viewPager.currentItem = 0
 
 
-//        binding.btnToHome.setOnClickListener {
-//            startActivity(Intent(this, HomeActivity::class.java))
-//        }
-
         //SWIPE VIEW PAGER
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -58,21 +89,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupView()
-//        binding.btmNav.setOnNavigationItemSelectedListener {
-//            when(it.itemId){
-//                R.id.homeMenu ->{
-//                    val viewPager = binding.viewPager
-//                    viewPager.setCurrentItem(0)
-//                    true
-//                }
-//                R.id.favoriteMenu ->{
-//                    val viewPager = binding.viewPager
-//                    viewPager.setCurrentItem(1)
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
+
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
+
+        binding.scanMenu.setOnClickListener{
+            startActivity(Intent(this, ScanActivity::class.java))
+//            launcherIntentCameraX.launch(intent)
+        }
 
     }
 
@@ -106,19 +135,29 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId){
-//            R.id.homeMenu -> {
-//                val viewPager = binding.viewPager
-//                viewPager.setCurrentItem(0)
-//                true
-//            }
-//            R.id.favoriteMenu -> {
-//                val viewPager = binding.viewPager
-//                viewPager.setCurrentItem(1)
-//                true
-//            }
+
+
+
+//    private val launcherIntentCameraX = registerForActivityResult(
+//        ActivityResultContracts.StartActivityForResult()
+//    ) {
+//        if (it.resultCode == CAMERA_X_RESULT) {
+//            val myFile = it.data?.getSerializableExtra("picture") as File
+//            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+//
+//            val result = rotateBitmap(
+//                BitmapFactory.decodeFile(myFile.path),
+//                isBackCamera
+//            )
+//
+////            binding.previewImageView.setImageBitmap(result)
 //        }
-//        return super.onOptionsItemSelected(item)
 //    }
+
+
+    companion object {
+        const val CAMERA_X_RESULT = 200
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
+    }
 }
