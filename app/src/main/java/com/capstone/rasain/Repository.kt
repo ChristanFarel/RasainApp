@@ -218,4 +218,31 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
         return up
 
     }
+
+    fun searchFood(food: String): LiveData<ArrayList<ResultsItem>>{
+        val allFood = MutableLiveData<ArrayList<ResultsItem>>()
+
+        val client = apiServiceMasakApa.searchRecipe(food)
+        client.enqueue(object: Callback<NewRecipeResponse> {
+            override fun onResponse(
+                call: Call<NewRecipeResponse>,
+                response: Response<NewRecipeResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        allFood.value = responseBody.results
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<NewRecipeResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
+        return allFood
+    }
 }
