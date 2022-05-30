@@ -2,6 +2,7 @@ package com.capstone.rasain.adapter
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -29,12 +30,22 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
         val imgRecipe = allRecipe.thumb
         val nameRecipe = allRecipe.title
         val timeRecipe = allRecipe.times
+        var title: String? = ""
+
+        for (x in allRecipe.key){
+            if (x.equals('-')){
+                title += " "
+            }else{
+                title += x
+            }
+        }
+
 
         Glide.with(holder.itemView.context)
             .load(imgRecipe)
             .into(holder.binding.imgRecipeHome)
 
-        holder.binding.txtRecipeName.text = nameRecipe
+        holder.binding.txtRecipeName.text = title
         holder.binding.txtTimeRecipe.text = timeRecipe
 
         holder.itemView.setOnClickListener{
