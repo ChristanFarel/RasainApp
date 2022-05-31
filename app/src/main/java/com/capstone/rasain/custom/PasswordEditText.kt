@@ -6,9 +6,12 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.capstone.rasain.R
@@ -17,8 +20,6 @@ class PasswordEditText : AppCompatEditText, View.OnTouchListener {
     private lateinit var iconPassword: Drawable
     private lateinit var iconEye: Drawable
     private lateinit var iconEyeSlash: Drawable
-    private var isEyeClick: Boolean = false
-
 
     constructor(context: Context) : super(context) {
         init()
@@ -34,9 +35,8 @@ class PasswordEditText : AppCompatEditText, View.OnTouchListener {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        hint = "Masukkan nama Anda"
+        hint = resources.getString(R.string.password_edit_text)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
-//        inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
     }
 
     private fun init() {
@@ -103,24 +103,22 @@ class PasswordEditText : AppCompatEditText, View.OnTouchListener {
                 }
             }
             when {
-                isEyeButtonClicked -> when (event.action) {
+                isEyeButtonClicked -> return when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         iconEye = ContextCompat.getDrawable(context, R.drawable.ic_eye) as Drawable
                         iconEyeSlash = ContextCompat.getDrawable(context, R.drawable.ic_eye_slash) as Drawable
-                        isEyeClick = true
-                        inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        transformationMethod = HideReturnsTransformationMethod.getInstance()
                         showPassword()
-                        return true
+                        true
                     }
                     MotionEvent.ACTION_UP -> {
                         iconEye = ContextCompat.getDrawable(context, R.drawable.ic_eye) as Drawable
                         iconEyeSlash = ContextCompat.getDrawable(context, R.drawable.ic_eye_slash) as Drawable
-                        isEyeClick = false
-                        inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        transformationMethod = PasswordTransformationMethod.getInstance()
                         hidePassword()
-                        return true
+                        true
                     }
-                    else -> return false
+                    else -> false
                 }
                 else -> return false
             }
