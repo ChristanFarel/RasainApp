@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +18,7 @@ import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.login.LoginActivity
 
 @Suppress("DEPRECATION")
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
 
     companion object {
@@ -49,7 +50,9 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.getCategory().observe(viewLifecycleOwner){
+            val catKey = arguments?.getString(ListCategoryAdapter.CAT_KEY)
             setCateRecycler(it)
+            Log.d("catKey",catKey.toString())
         }
 
         binding.btnLogout.setOnClickListener {
@@ -57,6 +60,8 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             activity?.finish()
         }
+
+
     }
 
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
@@ -73,7 +78,20 @@ class HomeFragment : Fragment() {
     private fun setCateRecycler(category: ArrayList<ResultsCategory>){
         binding.rcyCategory.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = ListCategoryAdapter(category)
+            adapter = ListCategoryAdapter(category, this@HomeFragment)
+        }
+    }
+
+    private fun setRecipeByCateRecycler(recipe: ArrayList<ResultsItem>){
+        binding.rcyFoodCategory.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            adapter = ListRecipeAdapter(recipe)
+        }
+    }
+
+    override fun data(catName: String, catKey: String) {
+        homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){
+            setRecipeByCateRecycler(it)
         }
     }
 

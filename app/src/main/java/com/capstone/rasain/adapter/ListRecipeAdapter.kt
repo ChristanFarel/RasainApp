@@ -28,7 +28,6 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
         val allRecipe = listRecipe[position]
 
         val imgRecipe = allRecipe.thumb
-        val nameRecipe = allRecipe.title
         val timeRecipe = allRecipe.times
         var title: String? = ""
 

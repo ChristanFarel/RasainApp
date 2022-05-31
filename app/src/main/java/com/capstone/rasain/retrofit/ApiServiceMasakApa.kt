@@ -26,4 +26,9 @@ interface ApiServiceMasakApa {
 
     @GET("/api/categorys/recipes")
     fun getCategory(): Call<CategoryResponse>
+
+    @GET("/api/categorys/recipes/:{key}")
+    fun getRecipeByCate(
+        @Path("key") key: String
+    ): Call<NewRecipeResponse>
 }
