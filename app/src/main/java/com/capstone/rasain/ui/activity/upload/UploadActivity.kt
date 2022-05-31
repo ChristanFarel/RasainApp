@@ -14,10 +14,10 @@ import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ActivityScanBinding
 import com.capstone.rasain.databinding.ActivityUploadBinding
+import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.scan.reduceFileImage
 import com.capstone.rasain.ui.activity.scan.rotateBitmap
-import com.capstone.rasain.ui.activity.search.SearchResultActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -76,7 +76,6 @@ class UploadActivity : AppCompatActivity() {
                     startActivity(intent)
                 })
             })
-
 
         }
     }
