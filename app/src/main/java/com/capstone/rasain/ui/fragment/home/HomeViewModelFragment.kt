@@ -11,4 +11,6 @@ class HomeViewModelFragment(private val repository: Repository) : ViewModel() {
     fun logut() = repository.logout()
 
     fun getRecipeByCate(key: String) = repository.getRecipeByCate(key)
+
+    fun getUser() = repository.getToken()
 }

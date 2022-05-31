@@ -50,15 +50,17 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         }
 
         homeViewModel.getCategory().observe(viewLifecycleOwner){
-            val catKey = arguments?.getString(ListCategoryAdapter.CAT_KEY)
             setCateRecycler(it)
-            Log.d("catKey",catKey.toString())
         }
 
         binding.btnLogout.setOnClickListener {
             homeViewModel.logut()
             startActivity(Intent(requireContext(), LoginActivity::class.java))
             activity?.finish()
+        }
+
+        homeViewModel.getUser().observe(viewLifecycleOwner){
+            binding.tvUser.text = "Welcome, ${it.fullName}"
         }
 
 
@@ -92,6 +94,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     override fun data(catName: String, catKey: String) {
         homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){
             setRecipeByCateRecycler(it)
+            binding.tvFoodCategory.text = catName
         }
     }
 
