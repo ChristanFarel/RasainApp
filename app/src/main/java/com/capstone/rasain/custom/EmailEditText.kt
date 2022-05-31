@@ -30,7 +30,7 @@ class EmailEditText : AppCompatEditText, View.OnTouchListener {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        hint = "Masukkan nama Anda"
+        hint = resources.getString(R.string.email_edit_text)
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
     }
 

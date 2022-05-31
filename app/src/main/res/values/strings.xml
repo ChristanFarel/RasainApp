@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RasainApp</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -9,9 +9,11 @@
     <string name="txtSignUp">Sign Up</string>
     <string name="txtSignIn">Sign In</string>
     <string name="txtEmail">Email</string>
+    <string name="email_edit_text">Email Address</string>
+    <string name="password_edit_text">Password</string>
     <string name="welcome_user">Welcome, %s</string>
     <string name="desc_app">Let’s cook healthier \nand cleaner food together</string>
-    <string name="search_food">Search food...</string>
+    <string name="search_food">Search food…</string>
     <string name="category">Category</string>
     <string name="food">Food</string>
     <string name="food_by_category">Food by Category</string>

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_centerVertical="false"
         android:layout_margin="20dp"
         android:orientation="vertical">
 
@@ -23,20 +24,23 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="24dp"
             android:text="@string/loginText"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:textSize="24sp" />
 
         <com.capstone.rasain.custom.EmailEditText
             android:id="@+id/edtTxtEmailLogin"
             android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:layout_marginVertical="8dp"
-            android:layout_height="48dp" />
+            android:inputType="textEmailAddress" />
 
         <com.capstone.rasain.custom.PasswordEditText
             android:id="@+id/edtTxtPassLogin"
             android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:layout_marginVertical="8dp"
-            android:inputType="textPassword"
-            android:layout_height="48dp" />
+            android:inputType="textPassword" />
 
         <com.capstone.rasain.custom.ButtonLogin
             android:id="@+id/btnLogin"
@@ -47,8 +51,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -33,7 +33,7 @@ class ButtonLogin: AppCompatButton {
             else -> disabledBackground
         }
         setTextColor(txtColor)
-        textSize = 12f
+        textSize = 16f
         gravity = Gravity.CENTER
         text = resources.getString(R.string.txtSignIn)
     }
