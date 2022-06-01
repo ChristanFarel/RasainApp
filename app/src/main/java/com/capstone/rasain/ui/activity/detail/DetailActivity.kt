@@ -32,7 +32,6 @@ class DetailActivity : AppCompatActivity() {
         )[DetailViewModel::class.java]
 
         key = intent.getStringExtra(ListRecipeAdapter.key).toString()
-        Log.d("key1", key)
 
         detailViewModel.getDetailRecipe(key).observe(this,{
             Glide.with(this)
@@ -42,8 +41,20 @@ class DetailActivity : AppCompatActivity() {
             binding.txtDiffRecipeDetail.text = it.dificulty
             binding.txtPortionRecipeDetail.text = it.servings
             binding.txtTimeRecipeDetail.text = it.times
-            binding.txtIngRecipeDetail.text = it.ingredient.toString()
-            binding.txtHowToCookRecipeDetail.text = it.step.toString()
+
+            var ingd: String = ""
+            var step: String = ""
+            for(x in it.step!!){
+                step += x +"\n"
+            }
+
+            for(x in it.ingredient!!){
+                ingd += x + "\n"
+            }
+
+            binding.txtIngRecipeDetail.text = ingd
+            binding.txtHowToCookRecipeDetail.text = step
+
             favorite = FavoriteFoodEntity(id = 0,key = key, title = it.title.toString(), imgUrl = it.thumb.toString())
         })
 
