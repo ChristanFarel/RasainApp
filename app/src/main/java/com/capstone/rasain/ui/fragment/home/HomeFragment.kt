@@ -1,21 +1,20 @@
 package com.capstone.rasain.ui.fragment.home
 
 import android.content.Intent
-import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListCategoryAdapter
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.HomeFragmentBinding
-import com.capstone.rasain.di.Injection
 import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.login.LoginActivity
+import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
@@ -32,10 +31,9 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = HomeFragmentBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+    ): View {
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -60,7 +58,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         }
 
         homeViewModel.getUser().observe(viewLifecycleOwner){
-            binding.tvUser.text = "Welcome, ${it.fullName}"
+            binding.tvUser.text = resources.getString(R.string.welcome_user, it.fullName)
         }
 
 
@@ -81,6 +79,8 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         binding.rcyCategory.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             adapter = ListCategoryAdapter(category, this@HomeFragment)
+            val randomCat = Random.nextInt(0, category.size)
+            data(category[randomCat].category.toString(), category[randomCat].key.toString())
         }
     }
 
