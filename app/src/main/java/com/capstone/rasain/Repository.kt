@@ -20,11 +20,17 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 
-class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  val favFood: FavoriteDao, private val appExecutors: AppExecutors, private val apiServiceRasainApp: ApiServiceRasainApp, private val preference: Preference ) {
+class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
+                      private  val favFood: FavoriteDao,
+                      private val appExecutors: AppExecutors,
+                      private val apiServiceRasainApp: ApiServiceRasainApp,
+                      private val preference: Preference ) {
 
-    fun getNewRecipe(): LiveData<ArrayList<ResultsItem>>{
+    fun getNewRecipe(): Pair<LiveData<Result<Boolean>>,LiveData<ArrayList<ResultsItem>>>{
         val allRecipe = MutableLiveData<ArrayList<ResultsItem>>()
+        val progress = MutableLiveData<Result<Boolean>>()
 
+        progress.value = Result.Loading
         val client = apiServiceMasakApa.getNewRecipe()
         client.enqueue(object: Callback<NewRecipeResponse> {
             override fun onResponse(
@@ -34,6 +40,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null){
+                        progress.value = Result.Success(true)
                         allRecipe.value = responseBody.results
                     }else{
                         Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
@@ -42,11 +49,12 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
             }
 
             override fun onFailure(call: Call<NewRecipeResponse>, t: Throwable) {
+                progress.value = Result.Error("Error")
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
 
         })
-        return allRecipe
+        return Pair(progress,allRecipe)
     }
 
     fun getDetailRecipe(key: String): LiveData<Results>{

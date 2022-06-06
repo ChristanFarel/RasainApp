@@ -28,7 +28,7 @@ class HomeActivity : AppCompatActivity() {
         )[HomeViewModel::class.java]
 
 
-        homeViewModel.getNewRecipe().observe(this,{
+        homeViewModel.getNewRecipe().second.observe(this,{
             setRecycler(it)
         })
 

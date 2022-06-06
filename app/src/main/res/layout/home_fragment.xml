@@ -177,4 +177,17 @@
 
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progBarHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView"
+        app:layout_constraintStart_toStartOf="@+id/scrollView"
+        app:layout_constraintTop_toTopOf="@+id/scrollView"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:indeterminate="true"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
