@@ -57,6 +57,37 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return Pair(progress,allRecipe)
     }
 
+    fun getNewRecipeWithLimit(size: Int): Pair<LiveData<Result<Boolean>>,LiveData<ArrayList<ResultsItem>>>{
+        val allRecipe = MutableLiveData<ArrayList<ResultsItem>>()
+        val progress = MutableLiveData<Result<Boolean>>()
+
+        progress.value = Result.Loading
+        val client = apiServiceMasakApa.getNewRecipeWithLimit(size)
+        client.enqueue(object: Callback<NewRecipeResponse> {
+            override fun onResponse(
+                call: Call<NewRecipeResponse>,
+                response: Response<NewRecipeResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        progress.value = Result.Success(true)
+                        allRecipe.value = responseBody.results
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<NewRecipeResponse>, t: Throwable) {
+                progress.value = Result.Error("Error")
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
+        return Pair(progress,allRecipe)
+    }
+
     fun getDetailRecipe(key: String): LiveData<Results>{
         val allRecipe = MutableLiveData<Results>()
 

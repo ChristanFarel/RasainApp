@@ -2,6 +2,7 @@ package com.capstone.rasain.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.R
@@ -31,6 +32,14 @@ class SearchResultActivity : AppCompatActivity() {
 
         val foodFromUpload = intent.getStringExtra(UploadActivity.FOOD)
         val foodFromHome = intent.getStringExtra(HomeFragment.HOMEFOOD)
+        val viewAllNew = intent.getStringExtra(HomeFragment.VIEWALLNEW)
+        Log.d("viewAll",viewAllNew.toString())
+
+        if (viewAllNew.toString().isNotEmpty()){
+            searchResultViewModel.getNewRecipe().second.observe(this,{
+                setFoodRecycler(it)
+            })
+        }
 
         searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this,{
             setFoodRecycler(it)

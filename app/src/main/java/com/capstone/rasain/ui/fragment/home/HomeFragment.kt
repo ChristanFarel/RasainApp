@@ -29,6 +29,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     companion object {
         fun newInstance() = HomeFragment()
         var HOMEFOOD = "HOMEFOOD"
+        var VIEWALLNEW = "VIEWALLNEW"
     }
 
     private lateinit var homeViewModel: HomeViewModelFragment
@@ -50,7 +51,11 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             ViewModelFactory(requireContext())
         )[HomeViewModelFragment::class.java]
 
-        homeViewModel.getNewRecipe().second.observe(viewLifecycleOwner) {
+//        homeViewModel.getNewRecipe().second.observe(viewLifecycleOwner) {
+//            setFoodRecycler(it)
+//        }
+
+        homeViewModel.getNewRecipeWithLimit(4).second.observe(viewLifecycleOwner) {
             setFoodRecycler(it)
         }
 
@@ -89,6 +94,12 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             }
 
         })
+
+        binding.txtViewAllNewRecipe.setOnClickListener {
+            val intent = Intent(requireContext(),SearchResultActivity::class.java)
+            intent.putExtra(VIEWALLNEW, "ViewAll")
+            startActivity(intent)
+        }
 
     }
 

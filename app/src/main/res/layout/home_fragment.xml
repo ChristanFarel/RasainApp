@@ -136,6 +136,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rcy_category" />
 
+
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcy_food"
                     android:layout_width="match_parent"
@@ -170,6 +172,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_food_category" />
+
+                <TextView
+                    android:id="@+id/txtViewAllNewRecipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:text="View All"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rcy_category" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

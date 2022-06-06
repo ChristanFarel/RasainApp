@@ -12,6 +12,11 @@ interface ApiServiceMasakApa {
     @GET("/api/recipes")
     fun getNewRecipe(): Call<NewRecipeResponse>
 
+    @GET("/api/recipes-length")
+    fun getNewRecipeWithLimit(
+        @Query("limit") size: Int
+    ): Call<NewRecipeResponse>
+
     @GET("/api/search")
     fun searchRecipe(
         @Query("q") food: String
