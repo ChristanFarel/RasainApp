@@ -7,14 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListFavoriteAdapter
-import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.FavoriteFragmentBinding
-import com.capstone.rasain.databinding.HomeFragmentBinding
-import com.capstone.rasain.response.ResultsItem
-import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
 
 class FavoriteFragment : Fragment() {
 
@@ -30,10 +25,9 @@ class FavoriteFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FavoriteFragmentBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+    ): View {
+        _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -43,13 +37,14 @@ class FavoriteFragment : Fragment() {
             ViewModelFactory(requireContext())
         )[FavoriteViewModel::class.java]
 
-        favoriteViewModel.getAllFav().observe(viewLifecycleOwner,{
-            adapter.submitList(it)
-        })
-
-        adapter = ListFavoriteAdapter {
-            favoriteViewModel.delFav(it.title)
+        favoriteViewModel.getAllFav().observe(viewLifecycleOwner) {
+            adapter.setListFav(it)
         }
+
+//        adapter = ListFavoriteAdapter {
+//            favoriteViewModel.delFav(it)
+//        }
+        adapter = ListFavoriteAdapter()
         binding.rcyFavorite.setHasFixedSize(true)
         binding.rcyFavorite.layoutManager = LinearLayoutManager(requireContext())
         binding.rcyFavorite.adapter = adapter

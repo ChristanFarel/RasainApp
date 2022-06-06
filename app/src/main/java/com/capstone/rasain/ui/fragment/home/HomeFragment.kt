@@ -1,6 +1,7 @@
 package com.capstone.rasain.ui.fragment.home
 
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
@@ -124,5 +125,4 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             binding.tvFoodCategory.text = catName
         }
     }
-
 }

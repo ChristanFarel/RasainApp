@@ -9,7 +9,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:gravity="center"
-    >
+    android:layout_marginHorizontal="8dp">
 
     <androidx.cardview.widget.CardView
         android:foregroundGravity = "center"
@@ -25,9 +25,7 @@
             android:layout_height = "match_parent"
             android:id="@+id/imgCategory"
             android:layout_gravity="center"
-            android:src="@drawable/coba"
-            />
-
+            android:src="@drawable/coba" />
 
     </androidx.cardview.widget.CardView>
 
@@ -35,6 +33,7 @@
         android:id="@+id/txtCategory"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:text="Sarapan"
         android:textSize="12sp" />
