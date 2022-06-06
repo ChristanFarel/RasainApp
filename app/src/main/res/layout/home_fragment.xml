@@ -62,7 +62,7 @@
                     android:background="@drawable/ic_logout"
                     />
 
-                <EditText
+                <SearchView
                     android:id="@+id/search_button"
                     android:layout_width="0dp"
                     android:layout_height="30dp"

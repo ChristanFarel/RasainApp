@@ -12,6 +12,7 @@ import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.search.SearchResultViewModel
 import com.capstone.rasain.ui.activity.upload.UploadActivity
+import com.capstone.rasain.ui.fragment.home.HomeFragment
 
 class SearchResultActivity : AppCompatActivity() {
 
@@ -28,9 +29,14 @@ class SearchResultActivity : AppCompatActivity() {
             ViewModelFactory(this)
         )[SearchResultViewModel::class.java]
 
-        val food = intent.getStringExtra(UploadActivity.FOOD)
+        val foodFromUpload = intent.getStringExtra(UploadActivity.FOOD)
+        val foodFromHome = intent.getStringExtra(HomeFragment.HOMEFOOD)
 
-        searchResultViewModel.searchFood(food.toString()).observe(this,{
+        searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this,{
+            setFoodRecycler(it)
+        })
+
+        searchResultViewModel.searchFood(foodFromHome.toString()).observe(this,{
             setFoodRecycler(it)
         })
 

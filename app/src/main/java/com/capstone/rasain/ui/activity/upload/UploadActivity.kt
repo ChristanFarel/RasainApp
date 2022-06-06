@@ -53,7 +53,6 @@ class UploadActivity : AppCompatActivity() {
 
 
     fun upload(){
-
         uploadViewModel = ViewModelProvider(
             this,
             ViewModelFactory(this)

@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -68,6 +69,7 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
+        binding.progBarScan.visibility = View.VISIBLE
         val imageCapture = imageCapture ?: return
 
         val photoFile = createFile(application)

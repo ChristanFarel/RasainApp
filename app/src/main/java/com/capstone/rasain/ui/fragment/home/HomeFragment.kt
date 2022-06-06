@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.HomeFragmentBinding
 import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
+import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.login.LoginActivity
 import com.capstone.rasain.ui.activity.main.MainActivity
 import kotlin.random.Random
@@ -25,6 +27,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
     companion object {
         fun newInstance() = HomeFragment()
+        var HOMEFOOD = "HOMEFOOD"
     }
 
     private lateinit var homeViewModel: HomeViewModelFragment
@@ -71,6 +74,20 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             binding.tvUser.text = resources.getString(R.string.welcome_user, it.fullName)
         }
 
+        binding.searchButton.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val intent = Intent(requireContext(),SearchResultActivity::class.java)
+                intent.putExtra(HOMEFOOD, query)
+                startActivity(intent)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
 
     }
 

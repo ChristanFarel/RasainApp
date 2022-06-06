@@ -43,5 +43,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_reserve" />
 
+    <ProgressBar
+        android:id="@+id/progBarScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCam"
+        app:layout_constraintEnd_toEndOf="@+id/viewCam"
+        app:layout_constraintStart_toStartOf="@+id/viewCam"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
