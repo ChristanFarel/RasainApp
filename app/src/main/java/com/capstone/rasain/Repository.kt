@@ -274,4 +274,59 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa, private  va
         return allRecipe
     }
 
+    fun getListArticle(): LiveData<ArrayList<ResultsItemArticle>>{
+
+        val allArticle = MutableLiveData<ArrayList<ResultsItemArticle>>()
+
+        val client = apiServiceMasakApa.getListArticle()
+        client.enqueue(object: Callback<ListArticleResponse> {
+            override fun onResponse(
+                call: Call<ListArticleResponse>,
+                response: Response<ListArticleResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        allArticle.value = responseBody.results
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ListArticleResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
+        return allArticle
+    }
+
+    fun getDetailArticle(key: String): LiveData<ResultsDetailArticle>{
+        val detail = MutableLiveData<ResultsDetailArticle>()
+
+        val client = apiServiceMasakApa.getDetailArticle(key)
+        client.enqueue(object: Callback<DetailArticleResponse> {
+            override fun onResponse(
+                call: Call<DetailArticleResponse>,
+                response: Response<DetailArticleResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        detail.value = responseBody.results
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<DetailArticleResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
+        return detail
+    }
+
 }

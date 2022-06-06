@@ -1,8 +1,6 @@
 package com.capstone.rasain.retrofit
 
-import com.capstone.rasain.response.CategoryResponse
-import com.capstone.rasain.response.DetailRecipeResponse
-import com.capstone.rasain.response.NewRecipeResponse
+import com.capstone.rasain.response.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Part
@@ -31,4 +29,13 @@ interface ApiServiceMasakApa {
     fun getRecipeByCate(
         @Path("key") key: String
     ): Call<NewRecipeResponse>
+
+    @GET("api/category/article/makanan-gaya-hidup")
+    fun getListArticle(): Call<ListArticleResponse>
+
+    @GET("/api/article/makanan-gaya-hidup/:{key}")
+    fun getDetailArticle(
+        @Path("key") key: String
+    ): Call<DetailArticleResponse>
+
 }
