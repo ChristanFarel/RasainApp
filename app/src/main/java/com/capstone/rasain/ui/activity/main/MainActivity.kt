@@ -25,6 +25,7 @@ import com.capstone.rasain.ui.activity.register.RegisterActivity
 import com.capstone.rasain.ui.activity.scan.ScanActivity
 import com.capstone.rasain.ui.activity.scan.rotateBitmap
 import com.capstone.rasain.ui.activity.scan.uriToFile
+import com.capstone.rasain.ui.fragment.article.ArticleFragment
 import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
 import com.capstone.rasain.ui.fragment.home.HomeFragment
 import java.io.File
@@ -64,7 +65,9 @@ class MainActivity : AppCompatActivity() {
 
         val viewPager = binding.viewPager
 
-        val listFragment: ArrayList<Fragment> = arrayListOf(HomeFragment(), FavoriteFragment())
+        val listFragment: ArrayList<Fragment> = arrayListOf(HomeFragment(), FavoriteFragment(),
+            ArticleFragment()
+        )
 
         val pagerAdapter =  PagerAdapter(this, listFragment)
 
@@ -84,6 +87,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.homeMenu -> viewPager.setCurrentItem(0, false)
                 R.id.favoriteMenu -> viewPager.setCurrentItem(1, false)
+                R.id.articleMenu -> viewPager.setCurrentItem(2, false)
             }
             true
         }

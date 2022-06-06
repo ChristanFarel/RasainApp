@@ -5,9 +5,11 @@ import android.os.AsyncTask
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.R
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListCategoryAdapter
 import com.capstone.rasain.adapter.ListRecipeAdapter
@@ -15,6 +17,7 @@ import com.capstone.rasain.databinding.HomeFragmentBinding
 import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.login.LoginActivity
+import com.capstone.rasain.ui.activity.main.MainActivity
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
@@ -44,8 +47,15 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             ViewModelFactory(requireContext())
         )[HomeViewModelFragment::class.java]
 
-        homeViewModel.getNewRecipe().observe(viewLifecycleOwner) {
+        homeViewModel.getNewRecipe().second.observe(viewLifecycleOwner) {
             setFoodRecycler(it)
+        }
+
+        homeViewModel.getNewRecipe().first.observe(viewLifecycleOwner) {
+            when(it){
+                is Result.Loading -> binding.progBarHome.visibility = View.VISIBLE
+                is Result.Success -> binding.progBarHome.visibility = View.GONE
+            }
         }
 
         homeViewModel.getCategory().observe(viewLifecycleOwner){

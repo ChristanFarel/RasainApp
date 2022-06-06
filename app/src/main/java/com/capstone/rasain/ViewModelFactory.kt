@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.detail.DetailViewModel
+import com.capstone.rasain.ui.activity.detailArticle.DetailArticleViewModel
 import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
 import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.login.LoginViewModel
@@ -13,6 +14,7 @@ import com.capstone.rasain.ui.activity.search.SearchResultViewModel
 import com.capstone.rasain.ui.activity.splashscreen.SplashScreenActivity
 import com.capstone.rasain.ui.activity.splashscreen.SplashScreenViewModel
 import com.capstone.rasain.ui.activity.upload.UploadViewModel
+import com.capstone.rasain.ui.fragment.article.ArticleViewModel
 import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
@@ -55,6 +57,14 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
 
             modelClass.isAssignableFrom(SearchResultViewModel::class.java) -> {
                 SearchResultViewModel(Injection.provideRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(ArticleViewModel::class.java) -> {
+                ArticleViewModel(Injection.provideRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(DetailArticleViewModel::class.java) -> {
+                DetailArticleViewModel(Injection.provideRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

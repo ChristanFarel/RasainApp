@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RasainApp">
         <activity
+            android:name=".ui.activity.detailArticle.DetailArticleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fragment.article.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.SearchResultActivity"
             android:exported="false" />
         <activity
