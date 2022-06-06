@@ -24,10 +24,10 @@ interface ApiServiceMasakApa {
         @Path("key") key: String
     ): Call<DetailRecipeResponse>
 
-    @GET("/api/categorys/recipes")
+    @GET("/api/category/recipes")
     fun getCategory(): Call<CategoryResponse>
 
-    @GET("/api/categorys/recipes/:{key}")
+    @GET("/api/category/recipes/:{key}")
     fun getRecipeByCate(
         @Path("key") key: String
     ): Call<NewRecipeResponse>

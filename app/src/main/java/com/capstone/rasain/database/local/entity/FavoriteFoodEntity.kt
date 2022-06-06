@@ -11,16 +11,16 @@ import kotlinx.parcelize.Parcelize
 data class FavoriteFoodEntity(
 
     @PrimaryKey(autoGenerate = true)
-    @field:ColumnInfo(name = "id")
-    var id: Int,
+    @ColumnInfo(name = "id")
+    var id: Int = 0,
 
-    @field:ColumnInfo(name = "key")
-    var key: String,
+    @ColumnInfo(name = "key")
+    var key: String? = null,
 
-    @field:ColumnInfo(name = "title")
-    var title: String,
+    @ColumnInfo(name = "title")
+    var title: String? = null,
 
-    @field:ColumnInfo(name = "imgUrl")
+    @ColumnInfo(name = "imgUrl")
     var imgUrl: String? = null
 
 ) : Parcelable

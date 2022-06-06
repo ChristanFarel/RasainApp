@@ -8,13 +8,13 @@ import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 @Dao
 interface FavoriteDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFav(fav: FavoriteFoodEntity)
 
     @Update
     fun updateFav(fav: FavoriteFoodEntity)
 
-    @Query("DELETE FROM favoriteFood WHERE key = :key")
+    @Query("DELETE FROM favoriteFood WHERE [key] = :key")
     fun deleteFav(key: String)
 
     @Query("SELECT * FROM favoriteFood ORDER BY id")
@@ -23,6 +23,6 @@ interface FavoriteDao {
     @Query("SELECT EXISTS(SELECT title FROM favoriteFood WHERE title = :title)")
     fun checkTitle(title: String): LiveData<Boolean>
 
-    @Query("SELECT EXISTS(SELECT key FROM favoriteFood WHERE key = :key)")
+    @Query("SELECT EXISTS(SELECT * FROM favoriteFood WHERE [key] = :key)")
     fun checkKey(key: String): LiveData<Boolean>
 }

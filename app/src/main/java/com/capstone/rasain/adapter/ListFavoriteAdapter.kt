@@ -5,72 +5,69 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.databinding.ItemFavoriteBinding
+import com.capstone.rasain.helper.FavoriteDiffCallback
+import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
+import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
 
-class ListFavoriteAdapter(private val onFavClick: (FavoriteFoodEntity) -> Unit) :
-    ListAdapter<FavoriteFoodEntity, ListFavoriteAdapter.MyViewHolder>(DIFF_CALLBACK) {
-
-
-    class MyViewHolder(val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(
-
-        binding.root
-    ) {
-        fun bind(favs: FavoriteFoodEntity) {
-            binding.txtTitleFavorite.text = favs.title
-            Log.d("gamabr",favs.imgUrl.toString())
-            Glide.with(itemView.context)
-                .load(favs.imgUrl)
-                .into(binding.imgFavorite)
-        }
-
+class ListFavoriteAdapter : RecyclerView.Adapter<ListFavoriteAdapter.FavoriteHolder>() {
+    private val listFav = ArrayList<FavoriteFoodEntity>()
+    private var context: Context? = null
+    fun setListFav(listFavFood: List<FavoriteFoodEntity>) {
+        val diffCallback = FavoriteDiffCallback(listFav,
+            listFavFood as ArrayList<FavoriteFoodEntity>
+        )
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        listFav.clear()
+        listFav.addAll(listFavFood)
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteHolder {
+        val binding = ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FavoriteHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val fav = getItem(position)
-        holder.bind(fav)
-
-        holder.binding.imgBtnFavorite.setOnClickListener {
-            onFavClick(fav)
-            Toast.makeText(holder.itemView.context,"terpencet",Toast.LENGTH_SHORT).show()
-        }
-
-        holder.itemView.setOnClickListener {
-
-        }
+    override fun onBindViewHolder(holder: FavoriteHolder, position: Int) {
+        holder.bind(listFav[position])
     }
 
-    companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<FavoriteFoodEntity> =
-            object : DiffUtil.ItemCallback<FavoriteFoodEntity>() {
-                override fun areItemsTheSame(
-                    oldFav: FavoriteFoodEntity,
-                    newFav: FavoriteFoodEntity
-                ): Boolean {
-                    return oldFav.key == newFav.key
-                }
+    override fun getItemCount(): Int {
+        return listFav.size
+    }
 
-                @SuppressLint("DiffUtilEquals")
-                override fun areContentsTheSame(
-                    oldFav: FavoriteFoodEntity,
-                    newFav: FavoriteFoodEntity
-                ): Boolean {
-                    return oldFav == newFav
+    inner class FavoriteHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(listFav: FavoriteFoodEntity) {
+            context = itemView.context
+            with(binding) {
+                Glide.with(itemView.context)
+                    .load(listFav.imgUrl)
+                    .into(imgFavorite)
+                txtTitleFavorite.text = listFav.title
+                imgBtnFavorite.setOnClickListener {
+                    val favViewModel = obtainViewModel(context as AppCompatActivity)
+                    favViewModel.delFav(listFav.key.toString())
                 }
             }
+
+        }
     }
 
-
+    private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
+        val factory = ViewModelFactory(context as AppCompatActivity)
+        return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
+    }
 }
