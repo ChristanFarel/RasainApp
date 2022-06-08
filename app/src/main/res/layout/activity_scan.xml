@@ -22,16 +22,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_scan" />
+        app:srcCompat="@drawable/ic_camera" />
 
     <ImageView
         android:id="@+id/btnToGallery"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/viewCam"
         app:layout_constraintStart_toStartOf="@+id/viewCam"
         app:layout_constraintTop_toTopOf="@+id/viewCam"
-        app:srcCompat="@drawable/ic_reserve" />
+        app:srcCompat="@drawable/ic_gallery" />
 
     <ImageView
         android:id="@+id/btnSwitchCam"
@@ -41,7 +42,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="@+id/viewCam"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_reserve" />
+        app:srcCompat="@drawable/ic_reverse" />
 
     <ProgressBar
         android:id="@+id/progBarScan"
