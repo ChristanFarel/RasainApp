@@ -8,7 +8,7 @@
     android:focusableInTouchMode="true"
     tools:context=".ui.fragment.home.HomeFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -136,8 +136,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rcy_category" />
 
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcy_food"
                     android:layout_width="match_parent"
@@ -169,6 +167,7 @@
                     android:clipToPadding="false"
                     android:paddingStart="22dp"
                     android:paddingEnd="22dp"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_food_category" />
@@ -187,7 +186,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progBarHome"

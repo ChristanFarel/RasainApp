@@ -53,52 +53,52 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-//    Retrofit
+    // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
-//    View Model dan Live Data
+    // View Model dan Live Data
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation "androidx.activity:activity-ktx:1.4.0"
 
-//    Datastore
+    // Datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-//    Glide
+    // Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
-//    RecyclerView
+    // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-//    Courutine
+    // Courutine
     testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2" //main coroutine rule
     testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation 'org.mockito:mockito-inline:3.12.4'
 
-//    ViewPager2
+    // ViewPager2
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.google.android.material:material:1.7.0-alpha02'
 
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-//noinspection GradleDependency
+    // noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
-//    JSOUP
+    // JSOUP
     implementation 'org.jsoup:jsoup:1.13.1'
 
-// gif
+    // gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 
-//    Room
+    // Room
     implementation 'androidx.room:room-runtime:2.4.2'
     kapt 'androidx.room:room-compiler:2.4.2'
 
-//    Camera X
+    // Camera X
     def camerax_version = "1.2.0-alpha01"
     implementation "androidx.camera:camera-camera2:${camerax_version}"
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
