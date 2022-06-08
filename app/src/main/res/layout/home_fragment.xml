@@ -59,45 +59,27 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tv_user"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_user"
-                    android:background="@drawable/ic_logout"
-                    />
+                    android:background="@drawable/ic_logout" />
 
                 <SearchView
                     android:id="@+id/search_button"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/rounded_search_bar"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="10dp"
+                    android:closeIcon="@drawable/ic_close_circle"
+                    android:iconifiedByDefault="false"
                     android:elevation="5dp"
                     android:ems="10"
-                    android:hint="@string/search_food"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
-                    android:paddingStart="20dp"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    app:layout_constraintEnd_toStartOf="@+id/button_setting"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_desc_app"
-                    tools:ignore="RtlSymmetry" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_setting"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="32dp"
-                    android:backgroundTint="@color/secondaryDarkColor"
-                    android:paddingTop="8dp"
-                    app:icon="@drawable/ic_setting"
-                    app:iconGravity="textTop"
-                    app:iconTint="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@+id/search_button"
+                    android:queryHint="@string/search_food"
+                    android:searchIcon="@drawable/ic_search"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/search_button" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_desc_app" />
 
                 <TextView
                     android:id="@+id/tv_category"
@@ -176,11 +158,12 @@
                     android:id="@+id/txtViewAllNewRecipe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
                     android:text="View All"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_food"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcy_category" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_food" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

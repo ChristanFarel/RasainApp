@@ -17,7 +17,7 @@
         android:icon="@drawable/article_selector"
         android:title="Article"/>
     <item
-        android:id="@+id/aboutUsMenu"
-        android:icon="@drawable/about_us_selector"
-        android:title="About Us"/>
+        android:id="@+id/profileMenu"
+        android:icon="@drawable/profile_selector"
+        android:title="Profile"/>
 </menu>

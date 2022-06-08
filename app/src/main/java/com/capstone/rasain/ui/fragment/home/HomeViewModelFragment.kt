@@ -10,7 +10,7 @@ class HomeViewModelFragment(private val repository: Repository) : ViewModel() {
 
     fun getCategory() = repository.getCategory()
 
-    fun logut() = repository.logout()
+    fun logout() = repository.logout()
 
     fun getRecipeByCate(key: String) = repository.getRecipeByCate(key)
 

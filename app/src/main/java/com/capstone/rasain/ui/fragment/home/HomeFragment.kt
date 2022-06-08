@@ -1,5 +1,6 @@
 package com.capstone.rasain.ui.fragment.home
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
 import androidx.lifecycle.ViewModelProvider
@@ -71,9 +72,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         }
 
         binding.btnLogout.setOnClickListener {
-            homeViewModel.logut()
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
-            activity?.finish()
+            alertLogout()
         }
 
         homeViewModel.getUser().observe(viewLifecycleOwner){
@@ -128,6 +127,22 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = ListRecipeAdapter(recipe)
         }
+    }
+
+    private fun alertLogout() {
+        val alertLogout = AlertDialog.Builder(requireContext())
+        with(alertLogout) {
+            setTitle(resources.getString(R.string.title_logout_confirmation))
+            setMessage(resources.getString(R.string.logout_confirmation))
+            setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
+                homeViewModel.logout()
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                activity?.finish()
+            }
+            setNegativeButton(resources.getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+        }
+        val alertDialog = alertLogout.create()
+        alertDialog.show()
     }
 
     override fun data(catName: String, catKey: String) {

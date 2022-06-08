@@ -17,4 +17,8 @@
     <string name="category">Category</string>
     <string name="food">Food</string>
     <string name="food_by_category">Food by Category</string>
+    <string name="title_logout_confirmation">Logout</string>
+    <string name="logout_confirmation">Are you sure want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
