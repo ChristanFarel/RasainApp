@@ -68,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
                 when (it) {
                     is Result.Success -> {
                         startActivity(Intent(this, MainActivity::class.java))
+                        finish()
                     }
                     is Result.Error -> {
                         Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()

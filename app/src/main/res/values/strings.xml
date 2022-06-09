@@ -21,4 +21,7 @@
     <string name="logout_confirmation">Are you sure want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="name_edit_text">Full Name</string>
+    <string name="register">Register</string>
+    <string name="txtRegister">Register</string>
 </resources>

@@ -62,8 +62,6 @@ class DetailActivity : AppCompatActivity() {
 
             binding.txtIngRecipeDetail.text = ingd
             binding.txtHowToCookRecipeDetail.text = step
-
-//            favorite = FavoriteFoodEntity(id = 0,key = key, title = it.title.toString(), imgUrl = it.thumb.toString())
         }
 
         detailViewModel.getKey(key).observe(this) { checked ->
@@ -71,17 +69,15 @@ class DetailActivity : AppCompatActivity() {
             if (checked) {
                 binding.imgBtnFavDetail.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.ic_favoriteddetail))
-//                    detailViewModel.delFav(favorite as FavoriteFoodEntity)
-//                    favorite = FavoriteFoodEntity()
             } else {
                 binding.imgBtnFavDetail.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.ic_lovedetail))
-//                    favorite.let { detailViewModel.insertFavorite(favorite as FavoriteFoodEntity) }
             }
         }
 
         binding.imgBtnBackDetail.setOnClickListener {
             startActivity(Intent(this,MainActivity::class.java ))
+            finish()
         }
     }
 

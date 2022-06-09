@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.capstone.rasain.R
 
-class ButtonLogin : AppCompatButton {
+class ButtonRegister : AppCompatButton {
     private var enabledBackground: Drawable? = null
     private var disabledBackground: Drawable? = null
     private var txtColor: Int = 0
@@ -22,7 +22,11 @@ class ButtonLogin : AppCompatButton {
         init()
     }
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init()
     }
 
@@ -35,7 +39,7 @@ class ButtonLogin : AppCompatButton {
         setTextColor(txtColor)
         textSize = 16f
         gravity = Gravity.CENTER
-        text = resources.getString(R.string.txtSignIn)
+        text = resources.getString(R.string.txtRegister)
     }
 
     private fun init() {
