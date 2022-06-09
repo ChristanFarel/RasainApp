@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.favorite.FavoriteFragment">
 
+    <ImageView
+        android:id="@+id/imgFavEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fav_kosong"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtFavEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="188dp"
+        android:text="Your Favorite Still Empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/imageView3" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcyFavorite"

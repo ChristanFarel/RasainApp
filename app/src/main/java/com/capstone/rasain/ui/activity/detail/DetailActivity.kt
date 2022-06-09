@@ -1,5 +1,6 @@
 package com.capstone.rasain.ui.activity.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +16,7 @@ import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.databinding.ActivityDetailBinding
 import com.capstone.rasain.di.Injection
 import com.capstone.rasain.response.Results
+import com.capstone.rasain.ui.activity.main.MainActivity
 
 class DetailActivity : AppCompatActivity() {
 
@@ -76,6 +78,10 @@ class DetailActivity : AppCompatActivity() {
                     ContextCompat.getDrawable(this, R.drawable.ic_lovedetail))
 //                    favorite.let { detailViewModel.insertFavorite(favorite as FavoriteFoodEntity) }
             }
+        }
+
+        binding.imgBtnBackDetail.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java ))
         }
     }
 

@@ -17,8 +17,6 @@ import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ActivityHomeBinding
 import com.capstone.rasain.databinding.ActivityLoginBinding
 import com.capstone.rasain.databinding.ActivityRegisterBinding
-import com.capstone.rasain.ui.activity.home.HomeActivity
-import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.main.MainActivity
 import com.capstone.rasain.ui.activity.register.RegisterActivity
 import com.capstone.rasain.ui.activity.register.RegisterViewModel

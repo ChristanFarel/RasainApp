@@ -11,6 +11,8 @@ import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.response.ResultsItemArticle
 import com.capstone.rasain.ui.activity.detail.DetailActivity
 import com.capstone.rasain.ui.activity.detailArticle.DetailArticleActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListArticleAdapter (private val listArticle: ArrayList<ResultsItemArticle>) :
     RecyclerView.Adapter<ListArticleAdapter.ListViewHolder>() {
@@ -36,7 +38,11 @@ class ListArticleAdapter (private val listArticle: ArrayList<ResultsItemArticle>
             }
         }
 
-        holder.binding.txtArticle.text = title
+        holder.binding.txtArticle.text = title?.split(' ')?.joinToString(" ") { it.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        } }
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, DetailArticleActivity::class.java)

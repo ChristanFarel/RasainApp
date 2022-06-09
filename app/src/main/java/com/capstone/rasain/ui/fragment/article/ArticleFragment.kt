@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.R
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListArticleAdapter
 import com.capstone.rasain.adapter.ListFavoriteAdapter
@@ -45,8 +46,15 @@ class ArticleFragment : Fragment() {
             ViewModelFactory(requireContext())
         )[ArticleViewModel::class.java]
 
-        articleViewModel.getListArticle().observe(viewLifecycleOwner,{
+        articleViewModel.getListArticle().second.observe(viewLifecycleOwner,{
             setRecycler(it)
+        })
+
+        articleViewModel.getListArticle().first.observe(viewLifecycleOwner,{
+            when (it){
+                is Result.Success -> binding.progBarArticle.visibility = View.GONE
+                is Result.Loading -> binding.progBarArticle.visibility = View.VISIBLE
+            }
         })
 
 

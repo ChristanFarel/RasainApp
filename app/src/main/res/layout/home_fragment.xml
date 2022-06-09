@@ -165,6 +165,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_food" />
 
+                <TextView
+                    android:id="@+id/txtViewAllFoodCat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_food_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_food_category"
+                    android:textSize="12sp"
+                    android:text="View All"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

@@ -313,9 +313,12 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return allRecipe
     }
 
-    fun getListArticle(): LiveData<ArrayList<ResultsItemArticle>>{
+    fun getListArticle(): Pair<LiveData<Result<Boolean>>,LiveData<ArrayList<ResultsItemArticle>>>{
 
         val allArticle = MutableLiveData<ArrayList<ResultsItemArticle>>()
+        val progress = MutableLiveData<Result<Boolean>>()
+
+        progress.value = Result.Loading
 
         val client = apiServiceMasakApa.getListArticle()
         client.enqueue(object: Callback<ListArticleResponse> {
@@ -327,18 +330,21 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                     val responseBody = response.body()
                     if(responseBody != null){
                         allArticle.value = responseBody.results
+                        progress.value = Result.Success(true)
                     }else{
                         Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+                        progress.value = Result.Error("Error")
                     }
                 }
             }
 
             override fun onFailure(call: Call<ListArticleResponse>, t: Throwable) {
+                progress.value = Result.Error("Error")
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
 
         })
-        return allArticle
+        return Pair(progress,allArticle)
     }
 
     fun getDetailArticle(key: String): LiveData<ResultsDetailArticle>{

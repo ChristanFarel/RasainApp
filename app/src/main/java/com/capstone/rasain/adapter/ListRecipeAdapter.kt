@@ -12,8 +12,10 @@ import com.capstone.rasain.databinding.ItemRecipeHomeBinding
 import com.capstone.rasain.response.NewRecipeResponse
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.detail.DetailActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
+class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>, private val page: Int) :
     RecyclerView.Adapter<ListRecipeAdapter.ListViewHolder>() {
 
     class ListViewHolder(var binding: ItemRecipeHomeBinding) : RecyclerView.ViewHolder(binding.root)
@@ -39,12 +41,15 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
             }
         }
 
-
         Glide.with(holder.itemView.context)
             .load(imgRecipe)
             .into(holder.binding.imgRecipeHome)
 
-        holder.binding.txtRecipeName.text = title
+        holder.binding.txtRecipeName.text = title?.split(' ')?.joinToString(" ") { it.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        } }
         holder.binding.txtTimeRecipe.text = timeRecipe
 
         holder.itemView.setOnClickListener{
@@ -55,7 +60,13 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>) :
 
     }
 
-    override fun getItemCount(): Int = listRecipe.size
+    override fun getItemCount(): Int{
+        if (listRecipe.size > page){
+            return page
+        }else{
+            return  listRecipe.size
+        }
+    }
 
     companion object{
         var key = "KEY"

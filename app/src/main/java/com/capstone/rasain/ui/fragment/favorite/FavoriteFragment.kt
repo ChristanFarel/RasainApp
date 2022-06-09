@@ -38,12 +38,18 @@ class FavoriteFragment : Fragment() {
         )[FavoriteViewModel::class.java]
 
         favoriteViewModel.getAllFav().observe(viewLifecycleOwner) {
-            adapter.setListFav(it)
+            if (it.isNotEmpty()){
+                binding.imgFavEmpty.visibility = View.GONE
+                binding.txtFavEmpty.visibility = View.GONE
+                adapter.setListFav(it)
+            }else{
+                binding.imgFavEmpty.visibility = View.VISIBLE
+                binding.txtFavEmpty.visibility = View.VISIBLE
+                adapter.setListFav(it)
+            }
+
         }
 
-//        adapter = ListFavoriteAdapter {
-//            favoriteViewModel.delFav(it)
-//        }
         adapter = ListFavoriteAdapter()
         binding.rcyFavorite.setHasFixedSize(true)
         binding.rcyFavorite.layoutManager = LinearLayoutManager(requireContext())

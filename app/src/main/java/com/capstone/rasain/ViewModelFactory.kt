@@ -7,7 +7,6 @@ import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.detail.DetailViewModel
 import com.capstone.rasain.ui.activity.detailArticle.DetailArticleViewModel
 import com.capstone.rasain.ui.fragment.home.HomeViewModelFragment
-import com.capstone.rasain.ui.activity.home.HomeViewModel
 import com.capstone.rasain.ui.activity.login.LoginViewModel
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.search.SearchResultViewModel
@@ -22,10 +21,6 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(Injection.provideRepository(context)) as T
-            }
 
             modelClass.isAssignableFrom(HomeViewModelFragment::class.java) -> {
                 HomeViewModelFragment(Injection.provideRepository(context)) as T

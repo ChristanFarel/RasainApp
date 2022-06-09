@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.R
 import com.capstone.rasain.Result
@@ -107,7 +108,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 //            val listUserAdapter = ListRecipeAdapter(recipe)
 //            binding.rcyRecipeFragment.adapter = listUserAdapter
-            adapter = ListRecipeAdapter(recipe)
+            adapter = ListRecipeAdapter(recipe,4)
         }
 
 
@@ -122,10 +123,10 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         }
     }
 
-    private fun setRecipeByCateRecycler(recipe: ArrayList<ResultsItem>){
+    private fun setRecipeByCateRecycler(recipe: ArrayList<ResultsItem>, page: Int){
         binding.rcyFoodCategory.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            adapter = ListRecipeAdapter(recipe)
+            layoutManager = GridLayoutManager(activity,2)
+            adapter = ListRecipeAdapter(recipe,page)
         }
     }
 
@@ -146,8 +147,19 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     }
 
     override fun data(catName: String, catKey: String) {
-        homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){
-            setRecipeByCateRecycler(it)
+        homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){ list ->
+
+            setRecipeByCateRecycler(list,4)
+
+            binding.txtViewAllFoodCat.setOnClickListener {
+                if (binding.txtViewAllFoodCat.text.equals("View All")){
+                    binding.txtViewAllFoodCat.text = "Hide"
+                    setRecipeByCateRecycler(list,10)
+                }else{
+                    binding.txtViewAllFoodCat.text = "View All"
+                    setRecipeByCateRecycler(list,4)
+                }
+            }
             binding.tvFoodCategory.text = catName
         }
     }

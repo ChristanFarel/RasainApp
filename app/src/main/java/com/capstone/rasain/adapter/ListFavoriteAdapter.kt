@@ -11,15 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.databinding.ItemFavoriteBinding
 import com.capstone.rasain.helper.FavoriteDiffCallback
+import com.capstone.rasain.ui.activity.detail.DetailActivity
+import com.capstone.rasain.ui.activity.login.LoginActivity
 import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
 import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
 
@@ -59,15 +63,35 @@ class ListFavoriteAdapter : RecyclerView.Adapter<ListFavoriteAdapter.FavoriteHol
                 txtTitleFavorite.text = listFav.title
                 imgBtnFavorite.setOnClickListener {
                     val favViewModel = obtainViewModel(context as AppCompatActivity)
-                    favViewModel.delFav(listFav.key.toString())
+//                    favViewModel.delFav(listFav.key.toString())
+                    alertDelete(favViewModel, listFav.key.toString())
                 }
             }
 
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.putExtra(ListRecipeAdapter.key, listFav.key)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = ViewModelFactory(context as AppCompatActivity)
         return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
+    }
+
+    private fun alertDelete(favViewModel: FavoriteViewModel, key: String) {
+        val alertLogout = android.app.AlertDialog.Builder(context)
+        with(alertLogout) {
+            setTitle("Delete Favorite")
+            setMessage("Are you sure wants to delete favorite?")
+            setPositiveButton("Yes") { _, _ ->
+                favViewModel.delFav(key)
+            }
+            setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+        }
+        val alertDialog = alertLogout.create()
+        alertDialog.show()
     }
 }

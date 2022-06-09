@@ -56,7 +56,7 @@ class SearchResultActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@SearchResultActivity, LinearLayoutManager.VERTICAL, false)
 //            val listUserAdapter = ListRecipeAdapter(recipe)
 //            binding.rcyRecipeFragment.adapter = listUserAdapter
-            adapter = ListRecipeAdapter(recipe)
+            adapter = ListRecipeAdapter(recipe,10)
         }
     }
 }
