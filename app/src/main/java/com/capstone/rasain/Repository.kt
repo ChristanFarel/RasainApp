@@ -374,4 +374,33 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return detail
     }
 
+    fun updateUser(userId: String, token: String, name: String?, password: String?, email: String?): LiveData<LoginResponse>{
+        val user = MutableLiveData<LoginResponse>()
+
+        val client = apiServiceRasainApp.editUser("Bearer ${token}",name, email, password,userId)
+        client.enqueue(object: Callback<LoginResponse> {
+            override fun onResponse(
+                call: Call<LoginResponse>,
+                response: Response<LoginResponse>
+            ) {
+                if (response.isSuccessful){
+                    val responseBody = response.body()
+                    if(responseBody != null){
+                        user.value = responseBody!!
+                    }else{
+                        Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.e(ContentValues.TAG, "onFailure2: ${t.message}")
+            }
+
+        })
+        return user
+    }
+
+
+
 }

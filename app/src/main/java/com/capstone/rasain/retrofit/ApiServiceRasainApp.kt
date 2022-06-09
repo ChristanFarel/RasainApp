@@ -30,4 +30,19 @@ interface ApiServiceRasainApp {
         @Header("Authorization") auth: String,
         @Part file: MultipartBody.Part
     ): Call<FoodPredictionResponse>
+
+    @GET("users/{id}")
+    fun getUser(
+        @Path("id") id: String
+    ): Call<LoginResponse>
+
+    @FormUrlEncoded
+    @PUT("users/{id}")
+    fun editUser(
+        @Header("Authorization") auth: String,
+        @Field("fullName") fullName: String?,
+        @Field("email") email: String?,
+        @Field("password") pass: String?,
+        @Path("id") id: String
+    ): Call<LoginResponse>
 }
