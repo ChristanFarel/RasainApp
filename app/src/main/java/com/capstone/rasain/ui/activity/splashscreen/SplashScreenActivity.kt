@@ -56,15 +56,15 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun setupAction() {
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                splashViewModel.getToken().observe(this,{
-                    if (it.token.isEmpty()){
+                splashViewModel.getToken().observe(this) {
+                    if (it.token.isEmpty()) {
                         startActivity(Intent(this, LoginActivity::class.java))
                         finish()
-                    }else{
+                    } else {
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }
-                })
+                }
             },
             3000
         )

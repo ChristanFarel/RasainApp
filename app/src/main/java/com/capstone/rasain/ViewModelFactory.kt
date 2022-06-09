@@ -15,6 +15,7 @@ import com.capstone.rasain.ui.activity.splashscreen.SplashScreenViewModel
 import com.capstone.rasain.ui.activity.upload.UploadViewModel
 import com.capstone.rasain.ui.fragment.article.ArticleViewModel
 import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
+import com.capstone.rasain.ui.fragment.profile.ProfileViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
 
@@ -60,6 +61,10 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
 
             modelClass.isAssignableFrom(DetailArticleViewModel::class.java) -> {
                 DetailArticleViewModel(Injection.provideRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(Injection.provideRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
