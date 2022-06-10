@@ -105,24 +105,6 @@ class ProfileFragment : Fragment() {
 
         }
 
-//        binding.btnEdit.setOnClickListener {
-//            startActivity(Intent(requireContext(),EditProfileActivity::class.java))
-//        }
-
-        requireContext().let {
-            val fragmentManager = (context as? AppCompatActivity)?.supportFragmentManager
-            fragmentManager?.let {
-                val frag = fragmentManager.findFragmentById(R.id.linearLayoutFrag)
-                frag?.let { {
-                    val transaction = fragmentManager.beginTransaction()
-                    transaction.detach(it)
-                    transaction.attach(it)
-                    transaction.commit()
-                }
-                }
-            }
-        }
-
     }
 
     private fun editName(){
