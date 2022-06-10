@@ -48,10 +48,17 @@
 
 
         <Button
-            android:id="@+id/btnEdit"
+            android:id="@+id/btnEditName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text = "Edit"
+            android:text = "Edit Name"
+            />
+
+        <Button
+            android:id="@+id/btnEditPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Edit Pass"
             />
     </LinearLayout>
 

@@ -76,8 +76,11 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             alertLogout()
         }
 
-        homeViewModel.getUser().observe(viewLifecycleOwner){
-            binding.tvUser.text = resources.getString(R.string.welcome_user, it.fullName)
+        homeViewModel.getToken().observe(viewLifecycleOwner){
+            homeViewModel.getUser(it.userId).observe(viewLifecycleOwner){
+                binding.tvUser.text = resources.getString(R.string.welcome_user, it.data.user.fullName)
+            }
+
         }
 
         binding.searchButton.setOnQueryTextListener(object :
@@ -101,6 +104,16 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             startActivity(intent)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getToken().observe(viewLifecycleOwner){
+            homeViewModel.getUser(it.userId).observe(viewLifecycleOwner){
+                binding.tvUser.text = resources.getString(R.string.welcome_user, it.data.user.fullName)
+            }
+
+        }
     }
 
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){

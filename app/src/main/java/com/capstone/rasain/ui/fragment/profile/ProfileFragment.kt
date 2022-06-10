@@ -1,5 +1,6 @@
 package com.capstone.rasain.ui.fragment.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -7,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ProfileFragmentBinding
 
@@ -40,17 +43,19 @@ class ProfileFragment : Fragment() {
             ViewModelFactory(requireContext())
         )[ProfileViewModel::class.java]
 
-        profileViewModel.getUser().observe(viewLifecycleOwner){
-            userId = it.userId
-            userName = it.fullName
-            pass = "********"
+        profileViewModel.getToken().observe(viewLifecycleOwner){
+           profileViewModel.getUser(it.userId).observe(viewLifecycleOwner){
+               userId = it.data.user.userId
+               userName = it.data.user.fullName
+               pass = "********"
 
-            binding.txtNameInProfile.text = userName
-            binding.txtPassInProfile.text = pass
+               binding.txtNameInProfile.text = userName
+               binding.txtPassInProfile.text = pass
+           }
 
-            binding.btnEdit.setOnClickListener { view->
+            binding.btnEditName.setOnClickListener { view->
 
-                var m_Text: String = ""
+                var newName: String = ""
                 val alertLogout = android.app.AlertDialog.Builder(requireContext())
                 val input = EditText(requireContext())
                 with(alertLogout) {
@@ -61,9 +66,9 @@ class ProfileFragment : Fragment() {
                     setView(input)
 
                     setPositiveButton("Yes") { dialog, which ->
-                        m_Text += input.text.toString()
-                        Log.d("input 1", m_Text)
-                        profileViewModel.editUser(it.userId, it.token, null,name = m_Text,null).observe(viewLifecycleOwner){
+                        newName += input.text.toString()
+                        Log.d("input 1", newName)
+                        profileViewModel.editUser(it.userId, it.token, null,name = newName,null).observe(viewLifecycleOwner){
                             binding.txtNameInProfile.text = it.data.user.fullName
                         }
                     }
@@ -72,9 +77,50 @@ class ProfileFragment : Fragment() {
                 val alertDialog = alertLogout.create()
                 alertDialog.show()
 
-
             }
 
+            binding.btnEditPass.setOnClickListener { view ->
+                var newPass: String = ""
+                val alertLogout = android.app.AlertDialog.Builder(requireContext())
+                val input = EditText(requireContext())
+                with(alertLogout) {
+                    setTitle("Edit Your Name")
+                    setMessage("Fill your name")
+                    input.setHint("name")
+                    input.inputType = InputType.TYPE_CLASS_TEXT
+                    setView(input)
+
+                    setPositiveButton("Yes") { dialog, which ->
+                        newPass += input.text.toString()
+                        Log.d("input 1", newPass)
+                        profileViewModel.editUser(it.userId, it.token, newPass,null,null).observe(viewLifecycleOwner){
+                            binding.txtNameInProfile.text = it.data.user.fullName
+                        }
+                    }
+                    setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+                }
+                val alertDialog = alertLogout.create()
+                alertDialog.show()
+            }
+
+        }
+
+//        binding.btnEdit.setOnClickListener {
+//            startActivity(Intent(requireContext(),EditProfileActivity::class.java))
+//        }
+
+        requireContext().let {
+            val fragmentManager = (context as? AppCompatActivity)?.supportFragmentManager
+            fragmentManager?.let {
+                val frag = fragmentManager.findFragmentById(R.id.linearLayoutFrag)
+                frag?.let { {
+                    val transaction = fragmentManager.beginTransaction()
+                    transaction.detach(it)
+                    transaction.attach(it)
+                    transaction.commit()
+                }
+                }
+            }
         }
 
     }

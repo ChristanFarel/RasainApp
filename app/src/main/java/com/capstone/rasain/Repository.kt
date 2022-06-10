@@ -8,17 +8,17 @@ import androidx.lifecycle.asLiveData
 import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.database.local.room.FavoriteDao
 import com.capstone.rasain.response.*
+import com.capstone.rasain.retrofit.ApiConfig
 import com.capstone.rasain.retrofit.ApiServiceMasakApa
 import com.capstone.rasain.retrofit.ApiServiceRasainApp
 import com.capstone.rasain.util.AppExecutors
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import com.capstone.rasain.Result
-import com.capstone.rasain.retrofit.ApiConfig
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                       private  val favFood: FavoriteDao,
@@ -201,12 +201,13 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    if (responseBody != null) {
+                    if (responseBody != null && !responseBody.error) {
                         login.value = Result.Success(true)
                         MainScope().launch {
                             preference.saveTokenUser(responseBody.data.user)
                         }
                     } else {
+                        login.value = Result.Error("Error")
                         Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
                     }
                 }else{
@@ -375,9 +376,36 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
     }
 
     fun updateUser(userId: String, token: String, name: String?, password: String?, email: String?): LiveData<LoginResponse>{
+            val user = MutableLiveData<LoginResponse>()
+
+            val client = apiServiceRasainApp.editUser("Bearer ${token}",name, email, password,userId)
+            client.enqueue(object: Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if (response.isSuccessful){
+                        val responseBody = response.body()
+                        if(responseBody != null){
+                            user.postValue(responseBody!!)
+                        }else{
+                            Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.e(ContentValues.TAG, "onFailure2: ${t.message}")
+                }
+
+            })
+            return user
+    }
+
+    fun getUser(userId: String): LiveData<LoginResponse>{
         val user = MutableLiveData<LoginResponse>()
 
-        val client = apiServiceRasainApp.editUser("Bearer ${token}",name, email, password,userId)
+        val client = apiServiceRasainApp.getUser(userId)
         client.enqueue(object: Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
@@ -386,7 +414,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null){
-                        user.value = responseBody!!
+                        user.postValue(responseBody!!)
                     }else{
                         Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
                     }

@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RasainApp">
         <activity
+            android:name=".ui.activity.editProfile.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.detailArticle.DetailArticleActivity"
             android:exported="false" />
         <activity

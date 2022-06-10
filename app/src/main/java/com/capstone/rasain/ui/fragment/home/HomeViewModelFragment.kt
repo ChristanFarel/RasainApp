@@ -14,5 +14,8 @@ class HomeViewModelFragment(private val repository: Repository) : ViewModel() {
 
     fun getRecipeByCate(key: String) = repository.getRecipeByCate(key)
 
-    fun getUser() = repository.getToken()
+    fun getToken() = repository.getToken()
+
+    fun getUser(userId: String) = repository.getUser(userId)
+
 }
