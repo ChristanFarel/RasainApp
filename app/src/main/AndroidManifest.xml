@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -16,14 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RasainApp">
-        <activity
-            android:name=".ui.activity.editProfile.EditProfileActivity"
-            android:exported="false" />
+        <receiver android:name=".ui.activity.main.Schedule"
+            android:enabled="true"/>
         <activity
             android:name=".ui.activity.detailArticle.DetailArticleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.fragment.article.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.SearchResultActivity"
@@ -45,9 +42,6 @@
         </activity>
         <activity
             android:name=".ui.activity.detail.DetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.home.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.register.RegisterActivity"

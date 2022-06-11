@@ -1,6 +1,8 @@
 package com.capstone.rasain.ui.activity.main
 
 import android.Manifest
+import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -13,7 +15,11 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.camera2.internal.compat.CameraManagerCompat.CameraManagerCompatImpl.from
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.NotificationManagerCompat.from
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -30,6 +36,8 @@ import com.capstone.rasain.ui.fragment.favorite.FavoriteFragment
 import com.capstone.rasain.ui.fragment.home.HomeFragment
 import com.capstone.rasain.ui.fragment.profile.ProfileFragment
 import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -109,7 +117,65 @@ class MainActivity : AppCompatActivity() {
 //            launcherIntentCameraX.launch(intent)
         }
 
+//        notifChannel()
+//
+//        binding.btnNotif.setOnClickListener {
+//            sendNotif()
+//        }
+
+
+
     }
+
+    private fun notifChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "Notif"
+            val desc = "Ini adalah deskripsi"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("coba",name,importance).apply {
+                description = desc
+            }
+            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun sendNotif(){
+
+        val intent = Intent(applicationContext, Schedule::class.java)
+//        val title = "Coba Farel"
+//        val message = "Halo Halo Bandung lo"
+//        intent.putExtra(titleExtra, title)
+//        intent.putExtra(messageExtra, message)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            notificationID,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY,0)
+        calendar.set(Calendar.MINUTE,45)
+        calendar.set(Calendar.SECOND,30)
+        val time = calendar.timeInMillis
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent )
+
+//        var builder = NotificationCompat.Builder(this, "coba")
+//            .setSmallIcon(R.drawable.ic_article)
+//            .setContentTitle("coba")
+//            .setContentText("halo halo bandung")
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//
+//        with(NotificationManagerCompat.from(this)){
+//            notify(1,builder.build() )
+//        }
+    }
+
+
 
     class PagerAdapter(val activity: AppCompatActivity, private val listFragment: ArrayList<Fragment>) : FragmentStateAdapter(activity) {
         override fun getItemCount(): Int = listFragment.size
