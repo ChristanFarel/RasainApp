@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="24dp"
             android:text="@string/register"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <com.capstone.rasain.custom.NameEditText
             android:id="@+id/edtTxtNameReg"
