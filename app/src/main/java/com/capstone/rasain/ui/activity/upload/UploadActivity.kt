@@ -67,14 +67,15 @@ class UploadActivity : AppCompatActivity() {
                 reqImg
             )
 
-            uploadViewModel.getToken().observe(this,{
-                uploadViewModel.upload(imageMultipart, it.token).observe(this,{
+            uploadViewModel.getToken().observe(this) {
+                uploadViewModel.upload(imageMultipart, it.token).observe(this) {
                     getFood = it[0].label
-                    val intent = Intent(this, SearchResultActivity::class.java)
-                    intent.putExtra(FOOD, getFood)
-                    startActivity(intent)
-                })
-            })
+                }
+            }
+
+            val intent = Intent(this, SearchResultActivity::class.java)
+            intent.putExtra(FOOD, getFood)
+            startActivity(intent)
 
         }
     }

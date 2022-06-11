@@ -96,11 +96,11 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
         })
 
-        binding.txtViewAllNewRecipe.setOnClickListener {
-            val intent = Intent(requireContext(),SearchResultActivity::class.java)
-            intent.putExtra(VIEWALLNEW, "ViewAll")
-            startActivity(intent)
-        }
+//        binding.txtViewAllNewRecipe.setOnClickListener {
+//            val intent = Intent(requireContext(),SearchResultActivity::class.java)
+//            intent.putExtra(VIEWALLNEW, "ViewAll")
+//            startActivity(intent)
+//        }
 
     }
 
