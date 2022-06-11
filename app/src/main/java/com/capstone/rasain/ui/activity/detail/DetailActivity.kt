@@ -1,25 +1,19 @@
 package com.capstone.rasain.ui.activity.detail
 
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.capstone.rasain.R
-import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.databinding.ActivityDetailBinding
-import com.capstone.rasain.di.Injection
 import com.capstone.rasain.response.Results
-import com.capstone.rasain.ui.activity.main.MainActivity
 
 class DetailActivity : AppCompatActivity() {
 
@@ -73,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
             isFavorite = checked
             if (checked) {
                 binding.imgBtnFavDetail.setImageDrawable(
-                    ContextCompat.getDrawable(this, R.drawable.ic_favoriteddetail))
+                    ContextCompat.getDrawable(this, R.drawable.ic_lovedetail_selected))
             } else {
                 binding.imgBtnFavDetail.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.ic_lovedetail))

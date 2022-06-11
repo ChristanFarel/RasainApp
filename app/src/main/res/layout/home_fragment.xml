@@ -34,7 +34,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:text="@string/welcome_user"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/desc_app"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_user"
                     app:layout_constraintTop_toBottomOf="@+id/tv_user" />
@@ -82,41 +82,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_desc_app" />
 
                 <TextView
-                    android:id="@+id/tv_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/category"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/search_button" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcy_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingStart="22dp"
-                    android:paddingEnd="22dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_category" />
-
-                <TextView
                     android:id="@+id/tv_food"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/food"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcy_category" />
+                    app:layout_constraintTop_toBottomOf="@id/search_button" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcy_food"
@@ -130,17 +106,41 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_food" />
 
                 <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/category"
+                    android:textColor="?attr/colorOnSecondary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rcy_food" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingStart="22dp"
+                    android:paddingEnd="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_category" />
+
+                <TextView
                     android:id="@+id/tv_food_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/food_by_category"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnSecondary"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rcy_food" />
+                    app:layout_constraintTop_toBottomOf="@id/rcy_category" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcy_food_category"
@@ -170,12 +170,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_food_category"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_food_category"
-                    android:textSize="12sp"
                     android:text="View All"
-                    />
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_category"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_category" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

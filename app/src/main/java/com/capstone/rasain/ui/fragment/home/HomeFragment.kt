@@ -2,12 +2,10 @@ package com.capstone.rasain.ui.fragment.home
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.os.AsyncTask
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +19,6 @@ import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.login.LoginActivity
-import com.capstone.rasain.ui.activity.main.MainActivity
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
@@ -34,9 +31,10 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         var VIEWALLNEW = "VIEWALLNEW"
     }
 
-    private lateinit var homeViewModel: HomeViewModelFragment
+    private lateinit var homeViewModel: HomeViewModel
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
+    private var first = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +49,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         homeViewModel = ViewModelProvider(
             this,
             ViewModelFactory(requireContext())
-        )[HomeViewModelFragment::class.java]
+        )[HomeViewModel::class.java]
 
 //        homeViewModel.getNewRecipe().second.observe(viewLifecycleOwner) {
 //            setFoodRecycler(it)
@@ -133,6 +131,8 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             adapter = ListCategoryAdapter(category, this@HomeFragment)
             val randomCat = Random.nextInt(0, category.size)
             data(category[randomCat].category.toString(), category[randomCat].key.toString())
+            binding.tvFoodCategory.text = category[randomCat].category.toString()
+            first = true
         }
     }
 
@@ -161,7 +161,6 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
     override fun data(catName: String, catKey: String) {
         homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){ list ->
-
             setRecipeByCateRecycler(list,4)
 
             binding.txtViewAllFoodCat.setOnClickListener {
@@ -173,7 +172,12 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
                     setRecipeByCateRecycler(list,4)
                 }
             }
-            binding.tvFoodCategory.text = catName
+            if (first) {
+                binding.tvFoodCategory.visibility = View.VISIBLE
+                first = false
+            } else {
+                binding.tvFoodCategory.visibility = View.GONE
+            }
         }
     }
 }

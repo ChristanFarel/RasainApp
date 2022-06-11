@@ -1,19 +1,19 @@
 package com.capstone.rasain.ui.fragment.profile
 
-import android.content.Intent
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.Constraints
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ProfileFragmentBinding
+
 
 class ProfileFragment : Fragment() {
 
@@ -54,80 +54,91 @@ class ProfileFragment : Fragment() {
            }
 
             binding.btnEditName.setOnClickListener { view->
-
-                var newName: String = ""
-                val alertLogout = android.app.AlertDialog.Builder(requireContext())
-                val input = EditText(requireContext())
-                with(alertLogout) {
-                    setTitle("Edit Your Name")
-                    setMessage("Fill your name")
-                    input.setHint("name")
-                    input.inputType = InputType.TYPE_CLASS_TEXT
-                    setView(input)
-
-                    setPositiveButton("Yes") { dialog, which ->
-                        newName += input.text.toString()
-                        Log.d("input 1", newName)
-                        profileViewModel.editUser(it.userId, it.token, null,name = newName,null).observe(viewLifecycleOwner){
-                            binding.txtNameInProfile.text = it.data.user.fullName
-                        }
-                    }
-                    setNegativeButton("No") { dialog, _ -> dialog.cancel() }
-                }
-                val alertDialog = alertLogout.create()
-                alertDialog.show()
-
+                editName(it.userId, it.token)
             }
 
             binding.btnEditPass.setOnClickListener { view ->
-                var newPass: String = ""
-                val alertLogout = android.app.AlertDialog.Builder(requireContext())
-                val input = EditText(requireContext())
-                with(alertLogout) {
-                    setTitle("Edit Your Name")
-                    setMessage("Fill your name")
-                    input.setHint("name")
-                    input.inputType = InputType.TYPE_CLASS_TEXT
-                    setView(input)
-
-                    setPositiveButton("Yes") { dialog, which ->
-                        newPass += input.text.toString()
-                        Log.d("input 1", newPass)
-                        profileViewModel.editUser(it.userId, it.token, newPass,null,null).observe(viewLifecycleOwner){
-                            binding.txtNameInProfile.text = it.data.user.fullName
-                        }
-                    }
-                    setNegativeButton("No") { dialog, _ -> dialog.cancel() }
-                }
-                val alertDialog = alertLogout.create()
-                alertDialog.show()
+                editPass(it.userId, it.token)
+//                var newPass: String = ""
+//                val alertLogout = android.app.AlertDialog.Builder(requireContext())
+//                val input = EditText(requireContext())
+//                with(alertLogout) {
+//                    setTitle("Edit Your Name")
+//                    setMessage("Fill your name")
+//                    input.setHint("name")
+//                    input.inputType = InputType.TYPE_CLASS_TEXT
+//                    setView(input)
+//
+//                    setPositiveButton("Yes") { dialog, which ->
+//                        newPass += input.text.toString()
+//                        Log.d("input 1", newPass)
+//                        profileViewModel.editUser(it.userId, it.token, newPass,null,null).observe(viewLifecycleOwner){
+//                            binding.txtNameInProfile.text = it.data.user.fullName
+//                        }
+//                    }
+//                    setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+//                }
+//                val alertDialog = alertLogout.create()
+//                alertDialog.show()
             }
 
         }
 
     }
 
-    private fun editName(){
-        var m_Text: String = ""
-        val alertLogout = android.app.AlertDialog.Builder(requireContext())
-        val input = EditText(requireContext())
-        with(alertLogout) {
+    private fun editName(userId: String, token: String){
+        var newName: String = ""
+        val alertEditName = AlertDialog.Builder(requireContext())
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.edit_name, null)
+        with(alertEditName) {
             setTitle("Edit Your Name")
             setMessage("Fill your name")
-            input.setHint("name")
+            val input = view.findViewById<EditText>(R.id.edtName)
             input.inputType = InputType.TYPE_CLASS_TEXT
-            setView(input)
+            setView(view)
 
             setPositiveButton("Yes") { dialog, which ->
-                m_Text += input.text.toString()
-                Log.d("input 1", m_Text)
-                return@setPositiveButton
+                newName += input.text.toString()
+                Log.d("input 1", newName)
+                profileViewModel.editUser(userId = userId, token = token, pass = null, name = newName, email = null).observe(viewLifecycleOwner){
+                    binding.txtNameInProfile.text = it.data.user.fullName
+                }
             }
             setNegativeButton("No") { dialog, _ -> dialog.cancel() }
         }
-        val alertDialog = alertLogout.create()
+        val alertDialog = alertEditName.create()
+        val window = alertDialog.window
+        val wlp = window?.attributes
+        wlp?.gravity = Gravity.BOTTOM
         alertDialog.show()
-
     }
 
+    private fun editPass(userId: String, token: String) {
+        var newPass: String = ""
+        val alertEditPass = AlertDialog.Builder(requireContext())
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.edit_password, null)
+        with(alertEditPass) {
+            setTitle("Edit Your Password")
+            setMessage("Fill your password")
+            val input = view.findViewById<EditText>(R.id.edtPassword)
+            input.transformationMethod = PasswordTransformationMethod.getInstance()
+            setView(view)
+
+            setPositiveButton("Yes") { dialog, which ->
+                newPass += input.text.toString()
+                Log.d("input 1", newPass)
+                profileViewModel.editUser(userId, token, newPass,null,null).observe(viewLifecycleOwner){
+                    binding.txtNameInProfile.text = it.data.user.fullName
+                }
+            }
+            setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+        }
+        val alertDialog = alertEditPass.create()
+        val window = alertDialog.window
+        val wlp = window?.attributes
+        wlp?.gravity = Gravity.BOTTOM
+        alertDialog.show()
+    }
 }
