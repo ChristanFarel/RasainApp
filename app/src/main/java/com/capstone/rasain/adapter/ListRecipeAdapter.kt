@@ -31,25 +31,16 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>, private 
 
         val imgRecipe = allRecipe.thumb
         val timeRecipe = allRecipe.times
-        var title: String? = ""
 
-        for (x in allRecipe.key){
-            if (x.equals('-')){
-                title += " "
-            }else{
-                title += x
-            }
-        }
+        val title = allRecipe.key.split("-").joinToString(" ") { it.replaceFirstChar { s ->
+            if (s.isLowerCase()) s.titlecase(Locale.getDefault()) else s.toString()
+        }}
 
         Glide.with(holder.itemView.context)
             .load(imgRecipe)
             .into(holder.binding.imgRecipeHome)
 
-        holder.binding.txtRecipeName.text = title?.split(' ')?.joinToString(" ") { it.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
-            ) else it.toString()
-        } }
+        holder.binding.txtRecipeName.text = title
         holder.binding.txtTimeRecipe.text = timeRecipe
 
         holder.itemView.setOnClickListener{

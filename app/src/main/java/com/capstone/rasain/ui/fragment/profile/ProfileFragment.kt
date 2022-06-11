@@ -59,27 +59,6 @@ class ProfileFragment : Fragment() {
 
             binding.btnEditPass.setOnClickListener { view ->
                 editPass(it.userId, it.token)
-//                var newPass: String = ""
-//                val alertLogout = android.app.AlertDialog.Builder(requireContext())
-//                val input = EditText(requireContext())
-//                with(alertLogout) {
-//                    setTitle("Edit Your Name")
-//                    setMessage("Fill your name")
-//                    input.setHint("name")
-//                    input.inputType = InputType.TYPE_CLASS_TEXT
-//                    setView(input)
-//
-//                    setPositiveButton("Yes") { dialog, which ->
-//                        newPass += input.text.toString()
-//                        Log.d("input 1", newPass)
-//                        profileViewModel.editUser(it.userId, it.token, newPass,null,null).observe(viewLifecycleOwner){
-//                            binding.txtNameInProfile.text = it.data.user.fullName
-//                        }
-//                    }
-//                    setNegativeButton("No") { dialog, _ -> dialog.cancel() }
-//                }
-//                val alertDialog = alertLogout.create()
-//                alertDialog.show()
             }
 
         }
@@ -128,7 +107,7 @@ class ProfileFragment : Fragment() {
 
             setPositiveButton("Yes") { dialog, which ->
                 newPass += input.text.toString()
-                Log.d("input 1", newPass)
+                Log.d("PASSWORD BARU", newPass)
                 profileViewModel.editUser(userId, token, newPass,null,null).observe(viewLifecycleOwner){
                     binding.txtNameInProfile.text = it.data.user.fullName
                 }

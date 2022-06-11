@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
@@ -35,25 +36,32 @@ class SearchResultActivity : AppCompatActivity() {
         val viewAllNew = intent.getStringExtra(HomeFragment.VIEWALLNEW)
         Log.d("viewAll",viewAllNew.toString())
 
-        if (viewAllNew.toString().isNotEmpty()){
-            searchResultViewModel.getNewRecipe().second.observe(this,{
+//        if (viewAllNew.toString().isNotEmpty()){
+//            searchResultViewModel.getNewRecipe().second.observe(this) {
+//                setFoodRecycler(it)
+//            }
+//        }
+
+        if (foodFromUpload.toString().isNotEmpty()) {
+            searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this) {
                 setFoodRecycler(it)
-            })
+            }
         }
 
-        searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this,{
-            setFoodRecycler(it)
-        })
+        if (foodFromHome.toString().isNotEmpty()) {
+            searchResultViewModel.searchFood(foodFromHome.toString()).observe(this) {
+                setFoodRecycler(it)
+            }
+        }
 
-        searchResultViewModel.searchFood(foodFromHome.toString()).observe(this,{
-            setFoodRecycler(it)
-        })
+
+
 
     }
 
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
         binding.rcyFood.apply {
-            layoutManager = LinearLayoutManager(this@SearchResultActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(this@SearchResultActivity, 2, GridLayoutManager.VERTICAL, false)
 //            val listUserAdapter = ListRecipeAdapter(recipe)
 //            binding.rcyRecipeFragment.adapter = listUserAdapter
             adapter = ListRecipeAdapter(recipe,10)

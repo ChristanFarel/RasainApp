@@ -45,7 +45,10 @@ class ScanActivity : AppCompatActivity() {
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        binding.btnCapture.setOnClickListener { takePhoto() }
+        binding.btnCapture.setOnClickListener {
+            binding.btnCapture.isEnabled = false
+            takePhoto()
+        }
         binding.btnSwitchCam.setOnClickListener {
             cameraSelector = if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
             else CameraSelector.DEFAULT_BACK_CAMERA
