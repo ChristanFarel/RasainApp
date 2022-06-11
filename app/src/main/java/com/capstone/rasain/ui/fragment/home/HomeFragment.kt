@@ -37,6 +37,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     private lateinit var homeViewModel: HomeViewModelFragment
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
+    private var first = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -133,6 +134,8 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             adapter = ListCategoryAdapter(category, this@HomeFragment)
             val randomCat = Random.nextInt(0, category.size)
             data(category[randomCat].category.toString(), category[randomCat].key.toString())
+            binding.tvFoodCategory.text = category[randomCat].category.toString()
+            first = true
         }
     }
 
@@ -161,7 +164,6 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
     override fun data(catName: String, catKey: String) {
         homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){ list ->
-
             setRecipeByCateRecycler(list,4)
 
             binding.txtViewAllFoodCat.setOnClickListener {
@@ -173,7 +175,12 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
                     setRecipeByCateRecycler(list,4)
                 }
             }
-            binding.tvFoodCategory.text = catName
+            if (first) {
+                binding.tvFoodCategory.visibility = View.VISIBLE
+                first = false
+            } else {
+                binding.tvFoodCategory.visibility = View.GONE
+            }
         }
     }
 }
