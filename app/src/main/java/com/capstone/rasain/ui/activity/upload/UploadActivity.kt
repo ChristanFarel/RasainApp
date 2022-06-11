@@ -18,6 +18,7 @@ import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.scan.reduceFileImage
 import com.capstone.rasain.ui.activity.scan.rotateBitmap
+import com.capstone.rasain.ui.activity.search.UploadResultActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -70,12 +71,15 @@ class UploadActivity : AppCompatActivity() {
             uploadViewModel.getToken().observe(this) {
                 uploadViewModel.upload(imageMultipart, it.token).observe(this) {
                     getFood = it[0].label
+                    val intent = Intent(this, UploadResultActivity::class.java)
+                    intent.putExtra(FOOD, getFood)
+                    startActivity(intent)
                 }
             }
 
-            val intent = Intent(this, SearchResultActivity::class.java)
-            intent.putExtra(FOOD, getFood)
-            startActivity(intent)
+
+
+
 
         }
     }

@@ -19,6 +19,7 @@ import com.capstone.rasain.response.ResultsCategory
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.login.LoginActivity
+import com.capstone.rasain.ui.activity.search.ViewAllResultActivity
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
@@ -79,6 +80,10 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
                 binding.tvUser.text = resources.getString(R.string.welcome_user, it.data.user.fullName)
             }
 
+        }
+
+        binding.txtViewAllNewRecipe.setOnClickListener {
+            startActivity(Intent(requireContext(), ViewAllResultActivity::class.java))
         }
 
         binding.searchButton.setOnQueryTextListener(object :

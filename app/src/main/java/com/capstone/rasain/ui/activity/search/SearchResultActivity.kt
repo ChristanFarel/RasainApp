@@ -31,7 +31,7 @@ class SearchResultActivity : AppCompatActivity() {
             ViewModelFactory(this)
         )[SearchResultViewModel::class.java]
 
-        val foodFromUpload = intent.getStringExtra(UploadActivity.FOOD)
+
         val foodFromHome = intent.getStringExtra(HomeFragment.HOMEFOOD)
         val viewAllNew = intent.getStringExtra(HomeFragment.VIEWALLNEW)
         Log.d("viewAll",viewAllNew.toString())
@@ -41,12 +41,6 @@ class SearchResultActivity : AppCompatActivity() {
 //                setFoodRecycler(it)
 //            }
 //        }
-
-        if (foodFromUpload.toString().isNotEmpty()) {
-            searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this) {
-                setFoodRecycler(it)
-            }
-        }
 
         if (foodFromHome.toString().isNotEmpty()) {
             searchResultViewModel.searchFood(foodFromHome.toString()).observe(this) {
