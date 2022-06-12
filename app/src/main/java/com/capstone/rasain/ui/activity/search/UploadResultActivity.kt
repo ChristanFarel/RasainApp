@@ -42,7 +42,7 @@ class UploadResultActivity : AppCompatActivity() {
 
         binding.txtResult.text = resources.getString(R.string.upload_result, title)
 
-        searchResultViewModel.searchFood(foodFromUpload.toString()).second.observe(this) {
+        searchResultViewModel.searchFood(title).second.observe(this) {
             setFoodRecycler(it)
         }
 
