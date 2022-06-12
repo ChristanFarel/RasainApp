@@ -69,6 +69,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.edtTxtEmailReg.text.toString()
             val pass = binding.edtTxtPassReg.text.toString()
             registerViewModel.register(fullName, email, pass).observe(this) {
+
                 when (it) {
                     is Result.Success -> {
                         Toast.makeText(this, "Register Succes!", Toast.LENGTH_SHORT).show()
@@ -76,10 +77,15 @@ class RegisterActivity : AppCompatActivity() {
                         finish()
                     }
                     is Result.Loading -> {
-                        Toast.makeText(this, "Register tunggu", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                     }
                     is Result.Error -> {
-                        Toast.makeText(this, "Register error", Toast.LENGTH_SHORT).show()
+                        if(pass.length < 8){
+                            Toast.makeText(this, "Register error Pastikan Password lebih dari 8", Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(this, "Register error", Toast.LENGTH_SHORT).show()
+                        }
+
                     }
                 }
             }
