@@ -15,6 +15,8 @@ import com.capstone.rasain.databinding.ActivitySearchResultBinding
 import com.capstone.rasain.databinding.ActivityUploadResultBinding
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.upload.UploadActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UploadResultActivity : AppCompatActivity() {
 
@@ -34,8 +36,11 @@ class UploadResultActivity : AppCompatActivity() {
         )[SearchResultViewModel::class.java]
 
         val foodFromUpload = intent.getStringExtra(UploadActivity.FOOD)
+        val title = foodFromUpload.toString().split("-").joinToString(" ") { it.replaceFirstChar { s ->
+            if (s.isLowerCase()) s.titlecase(Locale.getDefault()) else s.toString()
+        }}
 
-        binding.txtResult.text = resources.getString(R.string.upload_result, foodFromUpload.toString())
+        binding.txtResult.text = resources.getString(R.string.upload_result, title)
 
         searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this) {
             setFoodRecycler(it)
