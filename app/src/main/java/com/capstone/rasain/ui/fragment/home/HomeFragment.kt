@@ -166,6 +166,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
     override fun data(catName: String, catKey: String) {
         homeViewModel.getRecipeByCate(catKey).observe(viewLifecycleOwner){ list ->
+            binding.txtViewAllFoodCat.text = "View All"
             setRecipeByCateRecycler(list,4)
 
             binding.txtViewAllFoodCat.setOnClickListener {
