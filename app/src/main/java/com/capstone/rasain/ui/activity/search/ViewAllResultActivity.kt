@@ -31,7 +31,6 @@ class ViewAllResultActivity : AppCompatActivity() {
             ViewModelFactory(this)
         )[SearchResultViewModel::class.java]
 
-
         searchResultViewModel.getNewRecipe().second.observe(this){
             setFoodRecycler(it)
         }
