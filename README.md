@@ -6,7 +6,7 @@
 <img src="https://github.com/ChristanFarel/RasainApp/blob/main/readme_asssets/5.jpeg" width=auto height=300 align="left"/>
 
 ## About Our App
-
+This application will provide you so many recipes, and the special thing of this application is, you can identifying your food just by taking a picture of your food or you can take it from the gallery and then this application will give you some recipes recommendation related to your photo.
 
 ## Another Rasain's Path
 | Repository                                                             | Description          |
