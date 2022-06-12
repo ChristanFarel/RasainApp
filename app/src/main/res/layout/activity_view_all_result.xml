@@ -14,7 +14,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="New Recipe For Today~"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textColor="?attr/colorOnSecondary"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
