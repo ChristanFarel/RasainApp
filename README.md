@@ -4,8 +4,7 @@
 <img src="https://github.com/ChristanFarel/RasainApp/blob/main/readme_asssets/3.jpeg" width=auto height=300 align="left"/>
 <img src="https://github.com/ChristanFarel/RasainApp/blob/main/readme_asssets/4.jpeg" width=auto height=300 align="left"/>
 <img src="https://github.com/ChristanFarel/RasainApp/blob/main/readme_asssets/5.jpeg" width=auto height=300 align="left"/>
-
-
+<br />
 # About Our App
 
 # Another Rasain's Path
@@ -44,14 +43,14 @@
 | [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData) | COMING SOON | ```implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"``` |
 | [Activity KTX](https://androidx.tech/artifacts/activity/activity-ktx/) | COMING SOON | ```implementation "androidx.activity:activity-ktx:1.4.0"``` |
 | [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) | COMING SOON | ```implementation "androidx.datastore:datastore-preferences:1.0.0"``` |
-| [Glide](https://github.com/bumptech/glide) | Fetching, decoding, and displaying images | ```implementation "com.github.bumptech.glide:glide:4.13.1" |
-| | | annotationProcessor "com.github.bumptech.glide:compiler:4.13.0"``` |
+| [Glide](https://github.com/bumptech/glide) | Fetching, decoding, and displaying images | ```implementation "com.github.bumptech.glide:glide:4.13.1"``` |
+| | | ```annotationProcessor "com.github.bumptech.glide:compiler:4.13.0"``` |
 | [Gif](https://github.com/koral--/android-gif-drawable) | COMING SOON | ```implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.17"``` |
-| [Room](https://developer.android.com/jetpack/androidx/releases/room?gclid=CjwKCAjwnZaVBhA6EiwAVVyv9KlHYLnyD9Aie8mZnsOryXePqeJOAWcOhcf4Dz9ECgoEeX0GIWlwQxoC59cQAvD_BwE&gclsrc=aw.ds) | COMING SOON | ```implementation "androidx.room:room-runtime:2.4.2" |
-| | | kapt "androidx.room:room-compiler:2.4.2"``` |
-| [CameraX](https://developer.android.com/jetpack/androidx/releases/camera) | COMING SOON | ```def camerax_version = "1.2.0-alpha02" |
-| | | implementation "androidx.camera:camera-camera2:${camerax_version}" |
-| | | implementation "androidx.camera:camera-lifecycle:${camerax_version}" |
-| | | implementation "androidx.camera:camera-view:${camerax_version}"``` |
+| [Room](https://developer.android.com/jetpack/androidx/releases/room?gclid=CjwKCAjwnZaVBhA6EiwAVVyv9KlHYLnyD9Aie8mZnsOryXePqeJOAWcOhcf4Dz9ECgoEeX0GIWlwQxoC59cQAvD_BwE&gclsrc=aw.ds) | COMING SOON | ```implementation "androidx.room:room-runtime:2.4.2"``` |
+| | | ```kapt "androidx.room:room-compiler:2.4.2"``` |
+| [CameraX](https://developer.android.com/jetpack/androidx/releases/camera) | COMING SOON | ```def camerax_version = "1.2.0-alpha02"``` |
+| | | ```implementation "androidx.camera:camera-camera2:${camerax_version}"``` |
+| | | ```implementation "androidx.camera:camera-lifecycle:${camerax_version}"``` |
+| | | ```implementation "androidx.camera:camera-view:${camerax_version}"``` |
 | [Core KTX](https://developer.android.com/jetpack/androidx/releases/core) | COMING SOON | ```implementation "androidx.core:core-ktx:1.8.0"``` |
 | [Shimmer](http://facebook.github.io/shimmer-android/) | COMING SOON | ```implementation "com.facebook.shimmer:shimmer:0.5.0"``` |
