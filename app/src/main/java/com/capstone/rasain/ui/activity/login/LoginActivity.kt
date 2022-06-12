@@ -75,9 +75,9 @@ class LoginActivity : AppCompatActivity() {
                     }
                     is Result.Error -> {
                         if (!email.isValidEmail()) {
-                            Toast.makeText(this, "Login Error! Pastikan email valid!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Login Error! Enter valid email!", Toast.LENGTH_SHORT).show()
                         } else if (!pass.isValidPassword()) {
-                            Toast.makeText(this, "Login Error! Pastikan password lebih dari 8!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Login Error! Password must be greater than 8!", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this, "Login Error!", Toast.LENGTH_SHORT).show()
                         }

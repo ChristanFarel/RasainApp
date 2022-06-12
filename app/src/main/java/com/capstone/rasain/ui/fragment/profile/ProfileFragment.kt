@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.Toast
@@ -20,6 +21,7 @@ import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ProfileFragmentBinding
 import com.facebook.shimmer.ShimmerFrameLayout
+import java.util.regex.Pattern
 
 @Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
@@ -80,7 +82,7 @@ class ProfileFragment : Fragment() {
            }
 
             binding.btnEditName.setOnClickListener {
-                editName(user.userId, user.token)
+                editName(user.userId, user.token, user.fullName)
             }
 
             binding.btnEditPass.setOnClickListener {
@@ -92,7 +94,7 @@ class ProfileFragment : Fragment() {
     }
 
     @SuppressLint("InflateParams")
-    private fun editName(userId: String, token: String){
+    private fun editName(userId: String, token: String, name: String){
         var newName = ""
         val alertEditName = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
@@ -102,16 +104,21 @@ class ProfileFragment : Fragment() {
             setMessage("Fill your name")
             val input = view.findViewById<EditText>(R.id.edtName)
             input.inputType = InputType.TYPE_CLASS_TEXT
+            input.setText(name)
             setView(view)
 
-            setPositiveButton("Yes") { _, _ ->
+            setPositiveButton("SAVE") { _, _ ->
                 newName += input.text.toString()
-                Log.d("input 1", newName)
-                profileViewModel.editUser(userId = userId, token = token, pass = null, name = newName, email = null).observe(viewLifecycleOwner){
-                    binding.txtNameInProfile.text = it.data.user.fullName
+                if (newName.isNotEmpty()) {
+                    profileViewModel.editUser(userId = userId, token = token, pass = null, name = newName, email = null).observe(viewLifecycleOwner){
+                        binding.txtNameInProfile.text = it.data.user.fullName
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Name must not be empty!", Toast.LENGTH_SHORT).show()
                 }
+
             }
-            setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+            setNegativeButton("CANCEL") { dialog, _ -> dialog.cancel() }
         }
         val alertDialog = alertEditName.create()
         val window = alertDialog.window
@@ -133,14 +140,17 @@ class ProfileFragment : Fragment() {
             input.transformationMethod = PasswordTransformationMethod.getInstance()
             setView(view)
 
-            setPositiveButton("Yes") { _, _ ->
+            setPositiveButton("SAVE") { _, _ ->
                 newPass += input.text.toString()
-                Log.d("PASSWORD BARU", newPass)
-                profileViewModel.editUser(userId, token, newPass,null,null).observe(viewLifecycleOwner){
-                    binding.txtNameInProfile.text = it.data.user.fullName
+                if (newPass.isValidPassword()) {
+                    profileViewModel.editUser(userId, token, newPass,null,null).observe(viewLifecycleOwner){
+                        binding.txtNameInProfile.text = it.data.user.fullName
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Password must be greater than 8!", Toast.LENGTH_SHORT).show()
                 }
             }
-            setNegativeButton("No") { dialog, _ -> dialog.cancel() }
+            setNegativeButton("CANCEL") { dialog, _ -> dialog.cancel() }
         }
         val alertDialog = alertEditPass.create()
         val window = alertDialog.window
@@ -148,4 +158,6 @@ class ProfileFragment : Fragment() {
         wlp?.gravity = Gravity.BOTTOM
         alertDialog.show()
     }
+
+    private fun String.isValidPassword() = Pattern.compile("^" + ".{8,}" + "$").matcher(this).matches()
 }

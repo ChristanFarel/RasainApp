@@ -83,9 +83,9 @@ class RegisterActivity : AppCompatActivity() {
                     }
                     is Result.Error -> {
                         if(!email.isValidEmail()) {
-                            Toast.makeText(this, "Register Error! Pastikan email valid!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Register Error! Enter valid email!", Toast.LENGTH_SHORT).show()
                         } else if (!pass.isValidPassword()) {
-                            Toast.makeText(this, "Register Error! Pastikan password lebih dari 8!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Register Error! Password must be greater than 8!", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this, "Register Error!", Toast.LENGTH_SHORT).show()
                         }
