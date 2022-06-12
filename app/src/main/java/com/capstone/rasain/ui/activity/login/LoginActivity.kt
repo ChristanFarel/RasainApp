@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Patterns
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -19,7 +20,7 @@ import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ActivityLoginBinding
 import com.capstone.rasain.ui.activity.main.MainActivity
 import com.capstone.rasain.ui.activity.register.RegisterActivity
-
+import java.util.regex.Pattern
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "pref")
 class LoginActivity : AppCompatActivity() {
@@ -68,11 +69,18 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.login(email, pass).observe(this) {
                 when (it) {
                     is Result.Success -> {
+                        Toast.makeText(this, "Login Success!", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }
                     is Result.Error -> {
-                        Toast.makeText(this, "Gagal", Toast.LENGTH_SHORT).show()
+                        if (!email.isValidEmail()) {
+                            Toast.makeText(this, "Login Error! Pastikan email valid!", Toast.LENGTH_SHORT).show()
+                        } else if (!pass.isValidPassword()) {
+                            Toast.makeText(this, "Login Error! Pastikan password lebih dari 8!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Login Error!", Toast.LENGTH_SHORT).show()
+                        }
                     }
                     is Result.Loading -> {
                         Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
@@ -105,4 +113,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()
     }
+
+    private fun String.isValidEmail() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    private fun String.isValidPassword() = Pattern.compile("^" + ".{8,}" + "$").matcher(this).matches()
 }

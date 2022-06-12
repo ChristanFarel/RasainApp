@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Patterns
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ActivityRegisterBinding
 import com.capstone.rasain.ui.activity.login.LoginActivity
+import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -72,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
 
                 when (it) {
                     is Result.Success -> {
-                        Toast.makeText(this, "Register Succes!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Register Success!", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, LoginActivity::class.java))
                         finish()
                     }
@@ -80,12 +82,13 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                     }
                     is Result.Error -> {
-                        if(pass.length < 8){
-                            Toast.makeText(this, "Register error Pastikan Password lebih dari 8", Toast.LENGTH_SHORT).show()
-                        }else{
-                            Toast.makeText(this, "Register error", Toast.LENGTH_SHORT).show()
+                        if(!email.isValidEmail()) {
+                            Toast.makeText(this, "Register Error! Pastikan email valid!", Toast.LENGTH_SHORT).show()
+                        } else if (!pass.isValidPassword()) {
+                            Toast.makeText(this, "Register Error! Pastikan password lebih dari 8!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Register Error!", Toast.LENGTH_SHORT).show()
                         }
-
                     }
                 }
             }
@@ -112,4 +115,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.isEnabled = name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()
     }
+
+    private fun String.isValidEmail() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    private fun String.isValidPassword() = Pattern.compile("^" + ".{8,}" + "$").matcher(this).matches()
 }
