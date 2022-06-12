@@ -2,19 +2,17 @@ package com.capstone.rasain.ui.activity.register
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.rasain.R
 import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ActivityRegisterBinding
-import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {

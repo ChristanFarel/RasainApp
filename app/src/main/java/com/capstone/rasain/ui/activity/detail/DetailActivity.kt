@@ -1,12 +1,13 @@
 package com.capstone.rasain.ui.activity.detail
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ScrollView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -59,6 +60,7 @@ class DetailActivity : AppCompatActivity() {
                     shimmer.visibility = View.GONE
                     scroll.visibility = View.VISIBLE
                 }
+                is Result.Error -> Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -72,8 +74,8 @@ class DetailActivity : AppCompatActivity() {
             binding.txtPortionRecipeDetail.text = it.servings
             binding.txtTimeRecipeDetail.text = it.times
 
-            var ingd: String = ""
-            var step: String = ""
+            var ingd = ""
+            var step = ""
             for (x in it.step!!) {
                 step += x + "\n"
             }

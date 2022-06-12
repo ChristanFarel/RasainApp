@@ -3,11 +3,11 @@
     <item
         android:id="@+id/homeMenu"
         android:icon="@drawable/home_selector"
-        android:title="Home"/>
+        android:title="@string/home"/>
     <item
         android:id="@+id/favoriteMenu"
         android:icon="@drawable/favorite_selector"
-        android:title="Favorite"/>
+        android:title="@string/favorite"/>
     <item
         android:id="@+id/scanMenu"
         android:checked="false"
@@ -15,9 +15,9 @@
     <item
         android:id="@+id/articleMenu"
         android:icon="@drawable/article_selector"
-        android:title="Article"/>
+        android:title="@string/article"/>
     <item
         android:id="@+id/profileMenu"
         android:icon="@drawable/profile_selector"
-        android:title="Profile"/>
+        android:title="@string/profile"/>
 </menu>

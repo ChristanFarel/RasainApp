@@ -4,7 +4,6 @@ import com.capstone.rasain.response.FoodPredictionResponse
 import com.capstone.rasain.response.LoginResponse
 import com.capstone.rasain.response.RegisterResponse
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 

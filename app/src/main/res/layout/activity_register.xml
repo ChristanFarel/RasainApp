@@ -12,7 +12,8 @@
         android:layout_centerInParent="true"
         android:layout_centerVertical="false"
         android:layout_margin="20dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <ImageView
             android:layout_width="match_parent"

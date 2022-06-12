@@ -3,18 +3,15 @@ package com.capstone.rasain.ui.activity.splashscreen
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ActivitySplashScreenBinding
-import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.login.LoginActivity
 import com.capstone.rasain.ui.activity.main.MainActivity
 

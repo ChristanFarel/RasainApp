@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="140dp"
         android:gravity="center"
-        android:text="Your Favorite Still Empty"
+        android:text="@string/your_favorite_still_empty"
         android:textColor="?attr/colorOnSecondary"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

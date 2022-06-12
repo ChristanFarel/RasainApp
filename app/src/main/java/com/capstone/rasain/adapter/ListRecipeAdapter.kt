@@ -1,19 +1,14 @@
 package com.capstone.rasain.adapter
 
 import android.content.Intent
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.rasain.databinding.ItemRecipeHomeBinding
-import com.capstone.rasain.response.NewRecipeResponse
 import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.detail.DetailActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>, private val page: Int) :
     RecyclerView.Adapter<ListRecipeAdapter.ListViewHolder>() {
@@ -52,10 +47,10 @@ class ListRecipeAdapter(private val listRecipe: ArrayList<ResultsItem>, private 
     }
 
     override fun getItemCount(): Int{
-        if (listRecipe.size > page){
-            return page
+        return if (listRecipe.size > page){
+            page
         }else{
-            return  listRecipe.size
+            listRecipe.size
         }
     }
 

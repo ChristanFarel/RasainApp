@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemCategory"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -15,7 +13,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:foregroundGravity="center"
         app:cardCornerRadius="160dp">
@@ -36,7 +33,6 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:text="Sarapan"
         android:textSize="12sp"
         android:textColor="@color/black"/>
 

@@ -24,9 +24,30 @@
     <string name="name_edit_text">Full Name</string>
     <string name="register">Register</string>
     <string name="txtRegister">Register</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="upload_result">Are you looking for \'%s\'?</string>
     <string name="search_result">Result for \'%s\'</string>
     <string name="new_recipe">New Recipe~</string>
+    <string name="view_all">View All</string>
+    <string name="hide">Hide</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="how_to_cook_it">How to cook it</string>
+    <string name="description">Description</string>
+    <string name="dont_have_account">Don\'t Have Account?</string>
+    <string name="register_here">Register Here!</string>
+    <string name="for_successful_guidelines">For successful get recipe that you want, let\'s follow these guidelines:</string>
+    <string name="make_sure_your_food_photo_taken_from_the_top">Make sure your food photo taken from the top</string>
+    <string name="make_sure_your_food_photo_has_the_light_as_good_as_well">Make sure your food photo has the light as good as well</string>
+    <string name="make_sure_your_food_photo_is_original_food">Make sure your food photo is original food</string>
+    <string name="make_sure_your_food_from_indonesian_food">Make sure your food from indonesian food</string>
+    <string name="ready_to_upload">Let\'s check your food photo is ready to upload!</string>
+    <string name="upload">Upload</string>
+    <string name="retake">Retake</string>
+    <string name="your_favorite_still_empty">Your Favorite Still Empty</string>
+    <string name="user_information">User Information</string>
+    <string name="name">Name</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="article">Article</string>
+    <string name="profile">Profile</string>
 </resources>

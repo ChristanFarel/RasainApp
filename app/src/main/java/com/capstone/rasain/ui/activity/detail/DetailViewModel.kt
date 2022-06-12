@@ -7,8 +7,6 @@ import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 class DetailViewModel(private val repository: Repository): ViewModel() {
     fun getDetailRecipe(key: String) = repository.getDetailRecipe(key)
 
-    fun getTitle(title: String) = repository.getFavTitle(title)
-
     fun getKey(key: String) = repository.getFavKey(key)
 
     fun insertFavorite(fav: FavoriteFoodEntity) = repository.insertFavorite(fav)

@@ -23,11 +23,9 @@
         <activity
             android:name=".ui.activity.search.UploadResultActivity"
             android:exported="false" />
-
         <receiver
             android:name=".ui.activity.main.Schedule"
             android:enabled="true" />
-
         <activity
             android:name=".ui.activity.detailArticle.DetailArticleActivity"
             android:exported="false" />

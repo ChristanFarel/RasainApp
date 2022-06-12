@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -35,7 +34,6 @@
             android:layout_marginEnd="8dp"
             android:ellipsize="none"
             android:scrollHorizontally="false"
-            android:text="rendang"
             android:textColor="@color/black"
             android:textSize="14sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/imgFavorite"

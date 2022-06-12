@@ -1,43 +1,35 @@
 package com.capstone.rasain.ui.fragment.article
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.rasain.R
 import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListArticleAdapter
-import com.capstone.rasain.adapter.ListFavoriteAdapter
-import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.ArticleFragmentBinding
-import com.capstone.rasain.databinding.FavoriteFragmentBinding
 import com.capstone.rasain.response.ResultsItemArticle
-import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
 
+@Suppress("DEPRECATION")
 class ArticleFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ArticleFragment()
-    }
 
     private lateinit var articleViewModel: ArticleViewModel
     private var _binding: ArticleFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: ListArticleAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = ArticleFragmentBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+        _binding = ArticleFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -54,6 +46,7 @@ class ArticleFragment : Fragment() {
             when (it) {
                 is Result.Success -> binding.progBarArticle.visibility = View.GONE
                 is Result.Loading -> binding.progBarArticle.visibility = View.VISIBLE
+                is Result.Error -> Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
             }
         }
     }

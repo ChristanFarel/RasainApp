@@ -4,13 +4,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.capstone.rasain.response.Data
 import com.capstone.rasain.response.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class Preference private constructor(private val dataStore: DataStore<Preferences>) {
-
 
     fun getTokenUser(): Flow<User> {
         return dataStore.data.map { pref ->
@@ -37,7 +35,6 @@ class Preference private constructor(private val dataStore: DataStore<Preference
             pref[TOKEN_KEY] = ""
         }
     }
-
 
     companion object {
         @Volatile

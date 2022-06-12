@@ -146,8 +146,6 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return allCategory
     }
 
-    fun getFavTitle(title: String): LiveData<Boolean> = favFood.checkTitle(title)
-
     fun getFavKey(key: String): LiveData<Boolean> = favFood.checkKey(key)
 
     fun insertFavorite(fav: FavoriteFoodEntity) {
@@ -384,7 +382,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
     fun updateUser(userId: String, token: String, name: String?, password: String?, email: String?): LiveData<LoginResponse>{
             val user = MutableLiveData<LoginResponse>()
 
-            val client = apiServiceRasainApp.editUser("Bearer ${token}",name, email, password,userId)
+            val client = apiServiceRasainApp.editUser("Bearer $token",name, email, password,userId)
             client.enqueue(object: Callback<LoginResponse> {
                 override fun onResponse(
                     call: Call<LoginResponse>,

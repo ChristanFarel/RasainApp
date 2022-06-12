@@ -36,11 +36,11 @@
             android:gravity="center_vertical"
             android:padding="8dp"
             android:paddingStart="24dp"
-            android:text="45 min"
             android:textColor="@android:color/white"
             android:transitionName="nameStory"
             card_view:layout_constraintStart_toStartOf="@+id/imgRecipeHome"
-            card_view:layout_constraintTop_toTopOf="@+id/imgRecipeHome" />
+            card_view:layout_constraintTop_toTopOf="@+id/imgRecipeHome"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/imgTime"
@@ -63,7 +63,6 @@
             android:ellipsize="none"
             android:gravity="center"
             android:scrollHorizontally="false"
-            android:text="Resep nasi krawu khas jawa timur"
             android:textColor="@color/black"
             android:textSize="16sp"
             card_view:layout_constraintBottom_toBottomOf="parent"

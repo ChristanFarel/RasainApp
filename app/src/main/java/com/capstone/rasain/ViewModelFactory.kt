@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.rasain.di.Injection
 import com.capstone.rasain.ui.activity.detail.DetailViewModel
 import com.capstone.rasain.ui.activity.detailArticle.DetailArticleViewModel
-import com.capstone.rasain.ui.fragment.home.HomeViewModel
 import com.capstone.rasain.ui.activity.login.LoginViewModel
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.search.SearchResultViewModel
@@ -14,6 +13,7 @@ import com.capstone.rasain.ui.activity.splashscreen.SplashScreenViewModel
 import com.capstone.rasain.ui.activity.upload.UploadViewModel
 import com.capstone.rasain.ui.fragment.article.ArticleViewModel
 import com.capstone.rasain.ui.fragment.favorite.FavoriteViewModel
+import com.capstone.rasain.ui.fragment.home.HomeViewModel
 import com.capstone.rasain.ui.fragment.profile.ProfileViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInstanceFactory() {
@@ -21,7 +21,6 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.NewInst
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(Injection.provideRepository(context)) as T
             }

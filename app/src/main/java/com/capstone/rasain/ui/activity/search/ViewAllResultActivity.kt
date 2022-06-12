@@ -1,16 +1,14 @@
 package com.capstone.rasain.ui.activity.search
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
-import com.capstone.rasain.databinding.ActivityUploadResultBinding
 import com.capstone.rasain.databinding.ActivityViewAllResultBinding
 import com.capstone.rasain.response.ResultsItem
 

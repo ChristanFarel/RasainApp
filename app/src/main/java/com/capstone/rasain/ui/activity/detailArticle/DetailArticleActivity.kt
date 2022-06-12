@@ -1,22 +1,19 @@
 package com.capstone.rasain.ui.activity.detailArticle
 
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ScrollView
-import androidx.core.widget.NestedScrollView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.capstone.rasain.R
 import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListArticleAdapter
 import com.capstone.rasain.databinding.ActivityDetailArticleBinding
-import com.capstone.rasain.databinding.ActivityDetailBinding
-import com.capstone.rasain.ui.activity.detail.DetailViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
 
 class DetailArticleActivity : AppCompatActivity() {
@@ -54,6 +51,7 @@ class DetailArticleActivity : AppCompatActivity() {
                     shimmer.visibility = View.GONE
                     scroll.visibility = View.VISIBLE
                 }
+                is Result.Error -> Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
             }
         }
 

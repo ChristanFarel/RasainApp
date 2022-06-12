@@ -1,21 +1,18 @@
 package com.capstone.rasain.ui.fragment.favorite
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListFavoriteAdapter
 import com.capstone.rasain.databinding.FavoriteFragmentBinding
 
+@Suppress("DEPRECATION")
 class FavoriteFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = FavoriteFragment()
-    }
 
     private lateinit var favoriteViewModel: FavoriteViewModel
     private var _binding: FavoriteFragmentBinding? = null
@@ -30,6 +27,7 @@ class FavoriteFragment : Fragment() {
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         favoriteViewModel = ViewModelProvider(
@@ -54,7 +52,5 @@ class FavoriteFragment : Fragment() {
         binding.rcyFavorite.setHasFixedSize(true)
         binding.rcyFavorite.layoutManager = LinearLayoutManager(requireContext())
         binding.rcyFavorite.adapter = adapter
-
     }
-
 }

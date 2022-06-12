@@ -88,9 +88,6 @@ dependencies {
     // noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
-    // JSOUP
-    implementation 'org.jsoup:jsoup:1.13.1'
-
     // gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 

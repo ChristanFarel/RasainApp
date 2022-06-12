@@ -1,14 +1,18 @@
 package com.capstone.rasain.ui.fragment.profile
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ScrollView
-import androidx.constraintlayout.widget.Constraints
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.rasain.R
@@ -17,12 +21,8 @@ import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ProfileFragmentBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 
-
+@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var shimmer: ShimmerFrameLayout
@@ -36,11 +36,12 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ProfileFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -65,6 +66,7 @@ class ProfileFragment : Fragment() {
                         shimmer.visibility = View.GONE
                         scroll.visibility = View.VISIBLE
                     }
+                    is Result.Error -> Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -77,11 +79,11 @@ class ProfileFragment : Fragment() {
                 binding.txtPassInProfile.text = pass
            }
 
-            binding.btnEditName.setOnClickListener { view ->
+            binding.btnEditName.setOnClickListener {
                 editName(user.userId, user.token)
             }
 
-            binding.btnEditPass.setOnClickListener { view ->
+            binding.btnEditPass.setOnClickListener {
                 editPass(user.userId, user.token)
             }
 
@@ -89,8 +91,9 @@ class ProfileFragment : Fragment() {
 
     }
 
+    @SuppressLint("InflateParams")
     private fun editName(userId: String, token: String){
-        var newName: String = ""
+        var newName = ""
         val alertEditName = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.edit_name, null)
@@ -101,7 +104,7 @@ class ProfileFragment : Fragment() {
             input.inputType = InputType.TYPE_CLASS_TEXT
             setView(view)
 
-            setPositiveButton("Yes") { dialog, which ->
+            setPositiveButton("Yes") { _, _ ->
                 newName += input.text.toString()
                 Log.d("input 1", newName)
                 profileViewModel.editUser(userId = userId, token = token, pass = null, name = newName, email = null).observe(viewLifecycleOwner){
@@ -117,8 +120,9 @@ class ProfileFragment : Fragment() {
         alertDialog.show()
     }
 
+    @SuppressLint("InflateParams")
     private fun editPass(userId: String, token: String) {
-        var newPass: String = ""
+        var newPass = ""
         val alertEditPass = AlertDialog.Builder(requireContext())
         val inflater = layoutInflater
         val view = inflater.inflate(R.layout.edit_password, null)
@@ -129,7 +133,7 @@ class ProfileFragment : Fragment() {
             input.transformationMethod = PasswordTransformationMethod.getInstance()
             setView(view)
 
-            setPositiveButton("Yes") { dialog, which ->
+            setPositiveButton("Yes") { _, _ ->
                 newPass += input.text.toString()
                 Log.d("PASSWORD BARU", newPass)
                 profileViewModel.editUser(userId, token, newPass,null,null).observe(viewLifecycleOwner){

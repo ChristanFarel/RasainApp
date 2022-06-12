@@ -1,10 +1,8 @@
 package com.capstone.rasain.ui.activity.scan
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,18 +10,14 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
-import com.capstone.rasain.R
-import com.capstone.rasain.databinding.ActivityRegisterBinding
 import com.capstone.rasain.databinding.ActivityScanBinding
-import com.capstone.rasain.ui.activity.main.MainActivity
-import com.capstone.rasain.ui.activity.main.MainActivity.Companion.CAMERA_X_RESULT
 import com.capstone.rasain.ui.activity.upload.UploadActivity
 import java.io.File
 import java.util.concurrent.ExecutorService

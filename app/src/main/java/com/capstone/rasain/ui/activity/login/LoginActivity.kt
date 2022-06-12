@@ -3,26 +3,22 @@ package com.capstone.rasain.ui.activity.login
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.rasain.R
 import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
-import com.capstone.rasain.databinding.ActivityHomeBinding
 import com.capstone.rasain.databinding.ActivityLoginBinding
-import com.capstone.rasain.databinding.ActivityRegisterBinding
 import com.capstone.rasain.ui.activity.main.MainActivity
 import com.capstone.rasain.ui.activity.register.RegisterActivity
-import com.capstone.rasain.ui.activity.register.RegisterViewModel
 
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "pref")

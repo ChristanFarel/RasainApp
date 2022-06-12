@@ -4,15 +4,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.capstone.rasain.databinding.ItemArticleBinding
-import com.capstone.rasain.databinding.ItemRecipeHomeBinding
-import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.response.ResultsItemArticle
-import com.capstone.rasain.ui.activity.detail.DetailActivity
 import com.capstone.rasain.ui.activity.detailArticle.DetailArticleActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ListArticleAdapter (private val listArticle: ArrayList<ResultsItemArticle>) :
     RecyclerView.Adapter<ListArticleAdapter.ListViewHolder>() {

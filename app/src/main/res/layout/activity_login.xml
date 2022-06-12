@@ -12,7 +12,8 @@
         android:layout_centerInParent="true"
         android:layout_centerVertical="false"
         android:layout_margin="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -59,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Don't Have Account?"
+                android:text="@string/dont_have_account"
                 android:textSize="12sp" />
 
             <TextView
@@ -67,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Register Here!"
+                android:text="@string/register_here"
                 android:textSize="12sp" />
         </LinearLayout>
 

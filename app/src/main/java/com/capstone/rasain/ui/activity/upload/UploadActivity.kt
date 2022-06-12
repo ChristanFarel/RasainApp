@@ -1,27 +1,17 @@
 package com.capstone.rasain.ui.activity.upload
 
-import android.Manifest
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.rasain.R
 import com.capstone.rasain.ViewModelFactory
-import com.capstone.rasain.databinding.ActivityScanBinding
 import com.capstone.rasain.databinding.ActivityUploadBinding
-import com.capstone.rasain.ui.activity.SearchResultActivity
-import com.capstone.rasain.ui.activity.register.RegisterViewModel
 import com.capstone.rasain.ui.activity.scan.ScanActivity
 import com.capstone.rasain.ui.activity.scan.reduceFileImage
-import com.capstone.rasain.ui.activity.scan.rotateBitmap
 import com.capstone.rasain.ui.activity.search.UploadResultActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -63,7 +53,7 @@ class UploadActivity : AppCompatActivity() {
     }
 
 
-    fun upload(){
+    private fun upload(){
         uploadViewModel = ViewModelProvider(
             this,
             ViewModelFactory(this)
@@ -78,8 +68,8 @@ class UploadActivity : AppCompatActivity() {
                 reqImg
             )
 
-            uploadViewModel.getToken().observe(this) {
-                uploadViewModel.upload(imageMultipart, it.token).observe(this) {
+            uploadViewModel.getToken().observe(this) { user ->
+                uploadViewModel.upload(imageMultipart, user.token).observe(this) {
                     getFood = it[0].label
                     val intent = Intent(this, UploadResultActivity::class.java)
                     intent.putExtra(FOOD, getFood)
@@ -106,7 +96,5 @@ class UploadActivity : AppCompatActivity() {
     companion object {
         const val CAMERA_X_RESULT = 200
         const val FOOD = "FOOD"
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 }
