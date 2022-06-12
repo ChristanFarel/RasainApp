@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_person"
-                app:layout_constraintBottom_toBottomOf="@+id/txtNameInProfile"
+                app:layout_constraintBottom_toBottomOf="@+id/txtNameInProfileShimmer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_key"
-                app:layout_constraintBottom_toBottomOf="@+id/txtPassInProfile"
+                app:layout_constraintBottom_toBottomOf="@+id/txtPassInProfileShimmer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 

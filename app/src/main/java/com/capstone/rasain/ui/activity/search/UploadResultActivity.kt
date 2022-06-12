@@ -1,8 +1,11 @@
 package com.capstone.rasain.ui.activity.search
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.rasain.R
@@ -23,18 +26,20 @@ class UploadResultActivity : AppCompatActivity() {
         binding = ActivityUploadResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
+
         searchResultViewModel = ViewModelProvider(
             this,
             ViewModelFactory(this)
         )[SearchResultViewModel::class.java]
 
         val foodFromUpload = intent.getStringExtra(UploadActivity.FOOD)
-        Log.d("food", foodFromUpload.toString())
+
+        binding.txtResult.text = resources.getString(R.string.upload_result, foodFromUpload.toString())
 
         searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this) {
             setFoodRecycler(it)
         }
-
     }
 
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
@@ -42,5 +47,18 @@ class UploadResultActivity : AppCompatActivity() {
             layoutManager = GridLayoutManager(this@UploadResultActivity, 2, GridLayoutManager.VERTICAL, false)
             adapter = ListRecipeAdapter(recipe,10)
         }
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 }

@@ -38,6 +38,8 @@ class SearchResultActivity : AppCompatActivity() {
 
         val foodFromHome = intent.getStringExtra(HomeFragment.HOMEFOOD)
 
+        binding.txtResult.text = resources.getString(R.string.search_result, foodFromHome.toString())
+
         if (foodFromHome.toString().isNotEmpty()) {
             searchResultViewModel.searchFood(foodFromHome.toString()).observe(this) {
                 setFoodRecycler(it)
