@@ -2,12 +2,15 @@ package com.capstone.rasain.ui.activity.search
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.capstone.rasain.R
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.ActivityUploadResultBinding
@@ -39,8 +42,23 @@ class UploadResultActivity : AppCompatActivity() {
 
         binding.txtResult.text = resources.getString(R.string.upload_result, title)
 
-        searchResultViewModel.searchFood(foodFromUpload.toString()).observe(this) {
+        searchResultViewModel.searchFood(foodFromUpload.toString()).second.observe(this) {
             setFoodRecycler(it)
+        }
+
+        searchResultViewModel.searchFood(foodFromUpload.toString()).first.observe(this){
+            when(it){
+                is Result.Loading -> {
+                    binding.progBarSearchUpRes.visibility = View.VISIBLE
+                }
+                is Result.Success -> {
+                    binding.progBarSearchUpRes.visibility = View.GONE
+                }
+                is Result.Error -> {
+                    binding.progBarSearchUpRes.visibility = View.GONE
+                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

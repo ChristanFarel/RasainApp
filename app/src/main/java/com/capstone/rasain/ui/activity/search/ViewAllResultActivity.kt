@@ -2,11 +2,14 @@ package com.capstone.rasain.ui.activity.search
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.databinding.ActivityViewAllResultBinding
@@ -33,6 +36,20 @@ class ViewAllResultActivity : AppCompatActivity() {
             setFoodRecycler(it)
         }
 
+        searchResultViewModel.getNewRecipe().first.observe(this){
+            when(it){
+                is Result.Loading -> {
+                    binding.progBarSearchView.visibility = View.VISIBLE
+                }
+                is Result.Success -> {
+                    binding.progBarSearchView.visibility = View.GONE
+                }
+                is Result.Error -> {
+                    binding.progBarSearchView.visibility = View.GONE
+                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){

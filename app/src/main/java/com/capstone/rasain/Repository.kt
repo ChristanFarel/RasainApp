@@ -261,9 +261,10 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
 
     }
 
-    fun searchFood(food: String): LiveData<ArrayList<ResultsItem>>{
+    fun searchFood(food: String): Pair<LiveData<Result<Boolean>>, LiveData<ArrayList<ResultsItem>>>{
         val allFood = MutableLiveData<ArrayList<ResultsItem>>()
-
+        val progess = MutableLiveData<Result<Boolean>>()
+        progess.value = Result.Loading
         val client = apiServiceMasakApa.searchRecipe(food)
         client.enqueue(object: Callback<NewRecipeResponse> {
             override fun onResponse(
@@ -273,19 +274,22 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null){
+                        progess.value = Result.Success(true)
                         allFood.value = responseBody.results
                     }else{
+                        progess.value = Result.Error("Error")
                         Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                     }
                 }
             }
 
             override fun onFailure(call: Call<NewRecipeResponse>, t: Throwable) {
+                progess.value = Result.Error("Error")
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
 
         })
-        return allFood
+        return Pair(progess,allFood)
     }
 
     fun getRecipeByCate(key: String): LiveData<ArrayList<ResultsItem>> {
