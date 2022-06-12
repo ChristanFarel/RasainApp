@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="16dp"
     tools:context=".ui.activity.search.UploadResultActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcyFoodUploadResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

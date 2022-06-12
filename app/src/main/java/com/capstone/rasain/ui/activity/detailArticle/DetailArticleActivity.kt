@@ -3,21 +3,28 @@ package com.capstone.rasain.ui.activity.detailArticle
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.ScrollView
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.capstone.rasain.R
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListArticleAdapter
 import com.capstone.rasain.databinding.ActivityDetailArticleBinding
 import com.capstone.rasain.databinding.ActivityDetailBinding
 import com.capstone.rasain.ui.activity.detail.DetailViewModel
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class DetailArticleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailArticleBinding
     private lateinit var detailArticleViewModel: DetailArticleViewModel
+    private lateinit var shimmer: ShimmerFrameLayout
+    private lateinit var scroll: ScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +32,9 @@ class DetailArticleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+        shimmer = binding.shimmerLayout
+        shimmer.startShimmer()
+        scroll = binding.scrollView
 
         detailArticleViewModel = ViewModelProvider(
             this,
@@ -33,14 +43,30 @@ class DetailArticleActivity : AppCompatActivity() {
 
         val key = intent.getStringExtra(ListArticleAdapter.key)
 
-        detailArticleViewModel.getDetailArticle(key.toString()).observe(this) {
+        detailArticleViewModel.getDetailArticle(key.toString()).first.observe(this) {
+            when(it){
+                is Result.Loading -> {
+                    shimmer.visibility = View.VISIBLE
+                    scroll.visibility = View.GONE
+                }
+                is Result.Success -> {
+                    shimmer.stopShimmer()
+                    shimmer.visibility = View.GONE
+                    scroll.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        detailArticleViewModel.getDetailArticle(key.toString()).second.observe(this) {
             Glide.with(this)
                 .load(it.thumb)
-                .into(binding.imgBtnBackToArticle)
+                .into(binding.imgDetailArticle)
 
             binding.txtTitleArticle.text = it.title
             binding.txtDescArticle.text = it.description
         }
+
+        binding.imgBtnBackToArticle.setOnClickListener { super.onBackPressed() }
     }
 
     private fun setupView() {

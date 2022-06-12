@@ -28,21 +28,11 @@ class ListArticleAdapter (private val listArticle: ArrayList<ResultsItemArticle>
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val allArticle = listArticle[position]
 
-        var title: String? = ""
+        val title = allArticle.key.split("-").joinToString(" ") { it.replaceFirstChar { s ->
+            if (s.isLowerCase()) s.titlecase(Locale.getDefault()) else s.toString()
+        }}
 
-        for (x in allArticle.key){
-            if (x.equals('-')){
-                title += " "
-            }else{
-                title += x
-            }
-        }
-
-        holder.binding.txtArticle.text = title?.split(' ')?.joinToString(" ") { it.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(
-                Locale.getDefault()
-            ) else it.toString()
-        } }
+        holder.binding.txtArticle.text = title
 
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, DetailArticleActivity::class.java)

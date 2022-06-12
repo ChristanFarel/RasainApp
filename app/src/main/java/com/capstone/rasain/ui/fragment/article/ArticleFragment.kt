@@ -32,7 +32,7 @@ class ArticleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = ArticleFragmentBinding.inflate(inflater,container,false)
         val view = binding.root
         return view
@@ -46,18 +46,16 @@ class ArticleFragment : Fragment() {
             ViewModelFactory(requireContext())
         )[ArticleViewModel::class.java]
 
-        articleViewModel.getListArticle().second.observe(viewLifecycleOwner,{
+        articleViewModel.getListArticle().second.observe(viewLifecycleOwner) {
             setRecycler(it)
-        })
+        }
 
-        articleViewModel.getListArticle().first.observe(viewLifecycleOwner,{
-            when (it){
+        articleViewModel.getListArticle().first.observe(viewLifecycleOwner) {
+            when (it) {
                 is Result.Success -> binding.progBarArticle.visibility = View.GONE
                 is Result.Loading -> binding.progBarArticle.visibility = View.VISIBLE
             }
-        })
-
-
+        }
     }
 
     private fun setRecycler(article: ArrayList<ResultsItemArticle>){

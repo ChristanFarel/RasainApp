@@ -3,22 +3,28 @@ package com.capstone.rasain.ui.activity.detail
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.ScrollView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.capstone.rasain.R
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.adapter.ListRecipeAdapter
 import com.capstone.rasain.database.local.entity.FavoriteFoodEntity
 import com.capstone.rasain.databinding.ActivityDetailBinding
 import com.capstone.rasain.response.Results
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
+    private lateinit var shimmer: ShimmerFrameLayout
+    private lateinit var scroll: ScrollView
     private lateinit var key: String
     private var favorite: FavoriteFoodEntity? = null
     private var isFavorite: Boolean? = null
@@ -29,6 +35,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupView()
+        shimmer = binding.shimmerLayout
+        shimmer.startShimmer()
+        scroll = binding.scrollView
 
         detailViewModel = ViewModelProvider(
             this,
@@ -39,7 +48,21 @@ class DetailActivity : AppCompatActivity() {
 
         favorite = FavoriteFoodEntity()
 
-        detailViewModel.getDetailRecipe(key).observe(this) {
+        detailViewModel.getDetailRecipe(key).first.observe(this) {
+            when(it){
+                is Result.Loading -> {
+                    shimmer.visibility = View.VISIBLE
+                    scroll.visibility = View.GONE
+                }
+                is Result.Success -> {
+                    shimmer.stopShimmer()
+                    shimmer.visibility = View.GONE
+                    scroll.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        detailViewModel.getDetailRecipe(key).second.observe(this) {
             setFavorite(it)
             Glide.with(this)
                 .load(it.thumb)
@@ -75,8 +98,6 @@ class DetailActivity : AppCompatActivity() {
         }
 
         binding.imgBtnBackDetail.setOnClickListener {
-//            startActivity(Intent(this,MainActivity::class.java ))
-//            finish()
             super.onBackPressed()
         }
     }

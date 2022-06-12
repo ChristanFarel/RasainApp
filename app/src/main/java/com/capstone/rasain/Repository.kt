@@ -88,9 +88,11 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return Pair(progress,allRecipe)
     }
 
-    fun getDetailRecipe(key: String): LiveData<Results>{
+    fun getDetailRecipe(key: String): Pair<LiveData<Result<Boolean>>, LiveData<Results>>{
         val allRecipe = MutableLiveData<Results>()
+        val progress = MutableLiveData<Result<Boolean>>()
 
+        progress.value = Result.Loading
         val client = apiServiceMasakApa.getDetailRecipe(key)
         client.enqueue(object: Callback<DetailRecipeResponse> {
             override fun onResponse(
@@ -100,6 +102,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                 if (response.isSuccessful){
                     val responseBody = response.body()
                     if(responseBody != null){
+                        progress.value = Result.Success(true)
                         allRecipe.value = responseBody.results!!
                     }else{
                         Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
@@ -108,11 +111,12 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
             }
 
             override fun onFailure(call: Call<DetailRecipeResponse>, t: Throwable) {
+                progress.value = Result.Error("Error")
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
 
         })
-        return allRecipe
+        return Pair(progress,allRecipe)
     }
 
     fun getCategory(): LiveData<ArrayList<ResultsCategory>>{
@@ -314,13 +318,11 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return allRecipe
     }
 
-    fun getListArticle(): Pair<LiveData<Result<Boolean>>,LiveData<ArrayList<ResultsItemArticle>>>{
-
+    fun getListArticle(): Pair<LiveData<Result<Boolean>>, LiveData<ArrayList<ResultsItemArticle>>>{
         val allArticle = MutableLiveData<ArrayList<ResultsItemArticle>>()
         val progress = MutableLiveData<Result<Boolean>>()
 
         progress.value = Result.Loading
-
         val client = apiServiceMasakApa.getListArticle()
         client.enqueue(object: Callback<ListArticleResponse> {
             override fun onResponse(
@@ -348,9 +350,11 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
         return Pair(progress,allArticle)
     }
 
-    fun getDetailArticle(key: String): LiveData<ResultsDetailArticle>{
+    fun getDetailArticle(key: String): Pair<LiveData<Result<Boolean>>, LiveData<ResultsDetailArticle>>{
         val detail = MutableLiveData<ResultsDetailArticle>()
+        val progress = MutableLiveData<Result<Boolean>>()
 
+        progress.value = Result.Loading
         val client = apiServiceMasakApa.getDetailArticle(key)
         client.enqueue(object: Callback<DetailArticleResponse> {
             override fun onResponse(
@@ -361,6 +365,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                     val responseBody = response.body()
                     if(responseBody != null){
                         detail.value = responseBody.results
+                        progress.value = Result.Success(true)
                     }else{
                         Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
                     }
@@ -368,11 +373,12 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
             }
 
             override fun onFailure(call: Call<DetailArticleResponse>, t: Throwable) {
+                progress.value = Result.Error("Error")
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
 
         })
-        return detail
+        return Pair(progress,detail)
     }
 
     fun updateUser(userId: String, token: String, name: String?, password: String?, email: String?): LiveData<LoginResponse>{
@@ -402,9 +408,11 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
             return user
     }
 
-    fun getUser(userId: String): LiveData<LoginResponse>{
+    fun getUser(userId: String): Pair<LiveData<Result<Boolean>>, LiveData<LoginResponse>>{
         val user = MutableLiveData<LoginResponse>()
+        val progress = MutableLiveData<Result<Boolean>>()
 
+        progress.value = Result.Loading
         val client = apiServiceRasainApp.getUser(userId)
         client.enqueue(object: Callback<LoginResponse> {
             override fun onResponse(
@@ -415,6 +423,7 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
                     val responseBody = response.body()
                     if(responseBody != null){
                         user.postValue(responseBody!!)
+                        progress.value = Result.Success(true)
                     }else{
                         Log.e(ContentValues.TAG, "onFailure1: ${response.message()}")
                     }
@@ -422,11 +431,12 @@ class Repository(private val apiServiceMasakApa: ApiServiceMasakApa,
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                progress.value = Result.Error("Error")
                 Log.e(ContentValues.TAG, "onFailure2: ${t.message}")
             }
 
         })
-        return user
+        return Pair(progress, user)
     }
 
 

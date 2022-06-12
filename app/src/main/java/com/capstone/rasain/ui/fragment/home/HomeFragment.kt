@@ -5,7 +5,9 @@ import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.widget.ScrollView
 import android.widget.SearchView
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import com.capstone.rasain.response.ResultsItem
 import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.login.LoginActivity
 import com.capstone.rasain.ui.activity.search.ViewAllResultActivity
+import com.facebook.shimmer.ShimmerFrameLayout
 import kotlin.random.Random
 
 @Suppress("DEPRECATION")
@@ -35,7 +38,8 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
-    private var first = false
+    private lateinit var shimmer: ShimmerFrameLayout
+    private lateinit var scroll: NestedScrollView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,14 +51,15 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        shimmer = binding.shimmerLayout
+        shimmer.startShimmer()
+        scroll = binding.scrollView
+
         homeViewModel = ViewModelProvider(
             this,
             ViewModelFactory(requireContext())
         )[HomeViewModel::class.java]
-
-//        homeViewModel.getNewRecipe().second.observe(viewLifecycleOwner) {
-//            setFoodRecycler(it)
-//        }
 
         homeViewModel.getNewRecipeWithLimit(4).second.observe(viewLifecycleOwner) {
             setFoodRecycler(it)
@@ -62,8 +67,15 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
         homeViewModel.getNewRecipe().first.observe(viewLifecycleOwner) {
             when(it){
-                is Result.Loading -> binding.progBarHome.visibility = View.VISIBLE
-                is Result.Success -> binding.progBarHome.visibility = View.GONE
+                is Result.Loading -> {
+                    shimmer.visibility = View.VISIBLE
+                    scroll.visibility = View.GONE
+                }
+                is Result.Success -> {
+                    shimmer.stopShimmer()
+                    shimmer.visibility = View.GONE
+                    scroll.visibility = View.VISIBLE
+                }
             }
         }
 
@@ -76,7 +88,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
         }
 
         homeViewModel.getToken().observe(viewLifecycleOwner){
-            homeViewModel.getUser(it.userId).observe(viewLifecycleOwner){
+            homeViewModel.getUser(it.userId).second.observe(viewLifecycleOwner){
                 binding.tvUser.text = resources.getString(R.string.welcome_user, it.data.user.fullName)
             }
 
@@ -101,18 +113,12 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
 
         })
 
-//        binding.txtViewAllNewRecipe.setOnClickListener {
-//            val intent = Intent(requireContext(),SearchResultActivity::class.java)
-//            intent.putExtra(VIEWALLNEW, "ViewAll")
-//            startActivity(intent)
-//        }
-
     }
 
     override fun onResume() {
         super.onResume()
         homeViewModel.getToken().observe(viewLifecycleOwner){
-            homeViewModel.getUser(it.userId).observe(viewLifecycleOwner){
+            homeViewModel.getUser(it.userId).second.observe(viewLifecycleOwner){
                 binding.tvUser.text = resources.getString(R.string.welcome_user, it.data.user.fullName)
             }
 
@@ -122,12 +128,8 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
         binding.rcyFood.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-//            val listUserAdapter = ListRecipeAdapter(recipe)
-//            binding.rcyRecipeFragment.adapter = listUserAdapter
             adapter = ListRecipeAdapter(recipe,4)
         }
-
-
     }
 
     private fun setCateRecycler(category: ArrayList<ResultsCategory>){
@@ -136,8 +138,6 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
             adapter = ListCategoryAdapter(category, this@HomeFragment)
             val randomCat = Random.nextInt(0, category.size)
             data(category[randomCat].category.toString(), category[randomCat].key.toString())
-            binding.tvFoodCategory.text = category[randomCat].category.toString()
-            first = true
         }
     }
 
@@ -177,12 +177,7 @@ class HomeFragment : Fragment(), ListCategoryAdapter.Callbacks {
                     setRecipeByCateRecycler(list,4)
                 }
             }
-            if (first) {
-                binding.tvFoodCategory.visibility = View.VISIBLE
-                first = false
-            } else {
-                binding.tvFoodCategory.visibility = View.GONE
-            }
+            binding.tvFoodCategory.text = catName
         }
     }
 }

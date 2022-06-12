@@ -8,6 +8,22 @@
     android:focusableInTouchMode="true"
     tools:context=".ui.fragment.home.HomeFragment">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/detail_user_layout"
+            layout="@layout/home_shimmer" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -174,27 +190,14 @@
                     android:layout_marginEnd="32dp"
                     android:text="View All"
                     android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_category"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_food_category"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_category" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_food_category" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <ProgressBar
-        android:id="@+id/progBarHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView"
-        app:layout_constraintStart_toStartOf="@+id/scrollView"
-        app:layout_constraintTop_toTopOf="@+id/scrollView"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:indeterminate="true"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

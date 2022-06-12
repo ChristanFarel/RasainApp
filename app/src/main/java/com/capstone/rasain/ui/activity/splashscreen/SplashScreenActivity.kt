@@ -36,8 +36,6 @@ class SplashScreenActivity : AppCompatActivity() {
             ViewModelFactory(this)
         )[SplashScreenViewModel::class.java]
 
-
-
     }
 
     private fun setupView() {

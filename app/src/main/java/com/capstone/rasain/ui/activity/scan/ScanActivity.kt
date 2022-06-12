@@ -102,14 +102,7 @@ class ScanActivity : AppCompatActivity() {
                     setResult(UploadActivity.CAMERA_X_RESULT, intent)
                     startActivity(intent)
                     finish()
-
-//                    getFile = photoFile
-//                    val result = BitmapFactory.decodeFile(photoFile.path)
-//                    binding.imgPreview.setImageBitmap(result)
-
                 }
-
-
             }
         )
     }

@@ -7,12 +7,15 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.*
 import android.widget.EditText
+import android.widget.ScrollView
 import androidx.constraintlayout.widget.Constraints
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.rasain.R
+import com.capstone.rasain.Result
 import com.capstone.rasain.ViewModelFactory
 import com.capstone.rasain.databinding.ProfileFragmentBinding
+import com.facebook.shimmer.ShimmerFrameLayout
 
 
 class ProfileFragment : Fragment() {
@@ -22,6 +25,8 @@ class ProfileFragment : Fragment() {
     }
 
     private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var shimmer: ShimmerFrameLayout
+    private lateinit var scroll: ScrollView
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var userId: String
@@ -38,27 +43,46 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        shimmer = binding.shimmerLayout
+        shimmer.startShimmer()
+        scroll = binding.scrollView2
+
         profileViewModel = ViewModelProvider(
             this,
             ViewModelFactory(requireContext())
         )[ProfileViewModel::class.java]
 
-        profileViewModel.getToken().observe(viewLifecycleOwner){
-           profileViewModel.getUser(it.userId).observe(viewLifecycleOwner){
-               userId = it.data.user.userId
-               userName = it.data.user.fullName
-               pass = "********"
+        profileViewModel.getToken().observe(viewLifecycleOwner) { user ->
+            profileViewModel.getUser(user.userId).first.observe(viewLifecycleOwner) {
+                when(it){
+                    is Result.Loading -> {
+                        shimmer.visibility = View.VISIBLE
+                        scroll.visibility = View.GONE
+                    }
+                    is Result.Success -> {
+                        shimmer.stopShimmer()
+                        shimmer.visibility = View.GONE
+                        scroll.visibility = View.VISIBLE
+                    }
+                }
+            }
 
-               binding.txtNameInProfile.text = userName
-               binding.txtPassInProfile.text = pass
+            profileViewModel.getUser(user.userId).second.observe(viewLifecycleOwner){
+                userId = it.data.user.userId
+                userName = it.data.user.fullName
+                pass = "********"
+
+                binding.txtNameInProfile.text = userName
+                binding.txtPassInProfile.text = pass
            }
 
-            binding.btnEditName.setOnClickListener { view->
-                editName(it.userId, it.token)
+            binding.btnEditName.setOnClickListener { view ->
+                editName(user.userId, user.token)
             }
 
             binding.btnEditPass.setOnClickListener { view ->
-                editPass(it.userId, it.token)
+                editPass(user.userId, user.token)
             }
 
         }

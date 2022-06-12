@@ -1,8 +1,11 @@
 package com.capstone.rasain.ui.activity
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,39 +29,39 @@ class SearchResultActivity : AppCompatActivity() {
         binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
+
         searchResultViewModel = ViewModelProvider(
             this,
             ViewModelFactory(this)
         )[SearchResultViewModel::class.java]
 
-
         val foodFromHome = intent.getStringExtra(HomeFragment.HOMEFOOD)
-        val viewAllNew = intent.getStringExtra(HomeFragment.VIEWALLNEW)
-        Log.d("viewAll",viewAllNew.toString())
-
-//        if (viewAllNew.toString().isNotEmpty()){
-//            searchResultViewModel.getNewRecipe().second.observe(this) {
-//                setFoodRecycler(it)
-//            }
-//        }
 
         if (foodFromHome.toString().isNotEmpty()) {
             searchResultViewModel.searchFood(foodFromHome.toString()).observe(this) {
                 setFoodRecycler(it)
             }
         }
-
-
-
-
     }
 
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
         binding.rcyFood.apply {
             layoutManager = GridLayoutManager(this@SearchResultActivity, 2, GridLayoutManager.VERTICAL, false)
-//            val listUserAdapter = ListRecipeAdapter(recipe)
-//            binding.rcyRecipeFragment.adapter = listUserAdapter
             adapter = ListRecipeAdapter(recipe,10)
         }
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 }

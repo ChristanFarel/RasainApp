@@ -40,8 +40,6 @@ class UploadResultActivity : AppCompatActivity() {
     private fun setFoodRecycler(recipe: ArrayList<ResultsItem>){
         binding.rcyFoodUploadResult.apply {
             layoutManager = GridLayoutManager(this@UploadResultActivity, 2, GridLayoutManager.VERTICAL, false)
-//            val listUserAdapter = ListRecipeAdapter(recipe)
-//            binding.rcyRecipeFragment.adapter = listUserAdapter
             adapter = ListRecipeAdapter(recipe,10)
         }
     }

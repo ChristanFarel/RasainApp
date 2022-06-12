@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.detail.DetailActivity">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/detail_user_layout"
+            layout="@layout/detail_shimmer" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -64,7 +80,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center"
-                    android:text="Rendak Enak Sekali Gurih Gurih Nyoi"
                     android:textColor="?attr/colorOnSecondary"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +109,6 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginBottom="8dp"
                             android:gravity="center"
-                            android:text="5 min"
                             android:textColor="?attr/colorPrimaryVariant"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -117,7 +131,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:gravity="center"
-                            android:text="Hard"
                             android:textColor="?attr/colorPrimaryVariant"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -143,7 +156,6 @@
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
                             android:gravity="center"
-                            android:text="5 Porsi"
                             android:textColor="?attr/colorPrimaryVariant"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -171,8 +183,9 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="Ingredient"
-                    android:textSize="16sp"
                     android:textColor="?attr/colorOnSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -184,7 +197,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center"
-                    android:text="Rendak Enak Sekali Gurih Gurih Nyoi"
                     android:textColor="?attr/colorOnSecondary"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -200,6 +212,7 @@
                     android:text="How to cook it"
                     android:textSize="16sp"
                     android:textColor="?attr/colorOnSecondary"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtIngRecipeDetail" />
 
@@ -212,7 +225,6 @@
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
-                    android:text="Rendak Enak Sekali Gurih Gurih Nyoi"
                     android:textColor="?attr/colorOnSecondary"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"

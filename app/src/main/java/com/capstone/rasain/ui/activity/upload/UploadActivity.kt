@@ -4,9 +4,12 @@ import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +19,7 @@ import com.capstone.rasain.databinding.ActivityScanBinding
 import com.capstone.rasain.databinding.ActivityUploadBinding
 import com.capstone.rasain.ui.activity.SearchResultActivity
 import com.capstone.rasain.ui.activity.register.RegisterViewModel
+import com.capstone.rasain.ui.activity.scan.ScanActivity
 import com.capstone.rasain.ui.activity.scan.reduceFileImage
 import com.capstone.rasain.ui.activity.scan.rotateBitmap
 import com.capstone.rasain.ui.activity.search.UploadResultActivity
@@ -36,6 +40,7 @@ class UploadActivity : AppCompatActivity() {
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
 
         uploadViewModel = ViewModelProvider(
             this,
@@ -48,7 +53,12 @@ class UploadActivity : AppCompatActivity() {
 
         binding.btnUpload.setOnClickListener {
             upload()
-            Toast.makeText(this,"kepencet",Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnRetake.setOnClickListener {
+            val intent = Intent(this, ScanActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -74,14 +84,23 @@ class UploadActivity : AppCompatActivity() {
                     val intent = Intent(this, UploadResultActivity::class.java)
                     intent.putExtra(FOOD, getFood)
                     startActivity(intent)
+                    finish()
                 }
             }
-
-
-
-
-
         }
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 
     companion object {
